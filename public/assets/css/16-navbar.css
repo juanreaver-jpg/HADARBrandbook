@@ -1,0 +1,341 @@
+/* ═══════════════════════════════════════════════════════════════════
+   NAVBAR — single authoritative block
+   ───────────────────────────────────────────────────────────────────
+   This is the ONLY place navbar styles live. Earlier draft blocks
+   that targeted nav / .nav-links / .year / .nav-hamburger have been
+   removed; do not re-introduce them elsewhere in this file.
+
+   States:
+     • default (scrolled / past hero) — translucent vellum surface
+       with a gold-tinted hairline, dark ink text. Reads cleanly
+       over cream, white and tan sections below the hero.
+     • body.nav-over-hero — fully transparent bar over the hero
+       video; warm cream text with text-shadow halo for legibility.
+     • body.nav-solid — explicit scrolled state; same surface as
+       default plus a soft drop-shadow lift.
+
+   !important is used only on `nav .nav-right .cta-button` rules
+   because the generic `.cta-button` base styles (defined near
+   lines ~513 / ~1712 for other on-page CTA placements) would
+   otherwise win the cascade for this in-nav instance. Everything
+   else relies on normal specificity.
+   =================================================================== */
+
+/* Shell — fixed bar, three-column grid. Pinned 1px above the top
+   so a parchment sliver can't show through during overscroll. */
+nav {
+  position: fixed;
+  top: -1px;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 32px;
+  height: 72px;
+  padding: 1px clamp(20px, 3vw, 44px) 0;
+  font-family: var(--sans);
+  background: rgba(244, 237, 222, 0.92);
+  -webkit-backdrop-filter: saturate(140%) blur(10px);
+  backdrop-filter: saturate(140%) blur(10px);
+  border-bottom: 1px solid rgba(184, 132, 42, 0.18);
+  box-shadow:
+    0 1px 0 rgba(26, 20, 19, 0.04),
+    0 10px 28px -20px rgba(26, 20, 19, 0.22);
+  transition:
+    background-color 420ms cubic-bezier(0.22, 0.61, 0.36, 1),
+    box-shadow 420ms cubic-bezier(0.22, 0.61, 0.36, 1),
+    border-color 420ms cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+/* Over-hero — fully transparent; text-shadow carries legibility. */
+body.nav-over-hero nav {
+  background: transparent;
+  border-bottom-color: transparent;
+  box-shadow: none;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
+/* Scrolled-state lift on top of the default vellum surface. */
+body.nav-solid nav {
+  box-shadow:
+    0 1px 0 rgba(26, 20, 19, 0.06),
+    0 10px 28px -16px rgba(26, 20, 19, 0.22);
+}
+
+/* Push the page below the fixed bar; let hero slide under it. */
+body { padding-top: 72px; }
+section.hero { margin-top: -72px; }
+
+/* ── Logo ───────────────────────────────────────────────────── */
+nav .logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 100%;
+  text-decoration: none;
+}
+nav .logo .logo-frame {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  height: 30px;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+nav .logo .logo-frame img {
+  width: auto;
+  height: 100%;
+}
+@media (max-width: 720px) {
+  nav .logo .logo-frame { height: 24px; }
+}
+nav .logo .logo-frame::after,
+nav .logo .logo-frame::before { display: none; }
+nav .logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: filter 320ms ease;
+}
+/* Default: natural inked crest. Over hero: invert + halo. */
+body:not(.nav-over-hero) nav .logo img {
+  filter: none;
+}
+body.nav-over-hero nav .logo img {
+  filter: brightness(0) invert(1)
+          drop-shadow(0 1px 2px rgba(0, 0, 0, 0.45))
+          drop-shadow(0 0 12px rgba(0, 0, 0, 0.35));
+}
+
+/* ── Links (center cluster) ─────────────────────────────────── */
+nav .nav-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(20px, 3vw, 40px);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+nav .nav-links a {
+  position: relative;
+  display: inline-block;
+  padding: 8px 2px;
+  color: rgba(26, 20, 19, 0.78);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition:
+    color 360ms cubic-bezier(0.22, 0.61, 0.36, 1),
+    text-shadow 360ms cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+nav .nav-links a > span {
+  position: relative;
+  display: inline-block;
+}
+nav .nav-links a > span::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -6px;
+  height: 1px;
+  background: var(--crimson);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 360ms cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+nav .nav-links a:hover,
+nav .nav-links a.is-active {
+  color: var(--ink);
+}
+nav .nav-links a:hover > span::after,
+nav .nav-links a.is-active > span::after {
+  transform: scaleX(1);
+}
+/* Over-hero: cream text with shadow halo, gold underline. */
+body.nav-over-hero nav .nav-links a {
+  color: rgba(245, 235, 220, 0.88);
+  text-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.55),
+    0 0 16px rgba(0, 0, 0, 0.35);
+}
+body.nav-over-hero nav .nav-links a:hover,
+body.nav-over-hero nav .nav-links a.is-active {
+  color: #f5ead7;
+}
+body.nav-over-hero nav .nav-links a > span::after {
+  background: #e8cf8d;
+}
+
+/* ── Right cluster: year marker + CTA + hamburger ───────────── */
+nav .nav-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Year — Hebrew (AM) · Gregorian pairing. Ink tones by default,
+   warm cream only when body.nav-over-hero. */
+nav .nav-right .year {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  color: rgba(26, 20, 19, 0.78);
+  font-family: var(--serif);
+  font-size: 14px;
+  line-height: 1;
+  letter-spacing: 0;
+  white-space: nowrap;
+  transition: color 360ms cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+nav .nav-right .year em {
+  font-style: italic;
+  font-weight: 500;
+  color: var(--crimson);
+}
+nav .nav-right .year .year-am,
+nav .nav-right .year .year-greg {
+  font-family: var(--sans);
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(26, 20, 19, 0.6);
+}
+nav .nav-right .year .year-sep {
+  color: rgba(26, 20, 19, 0.32);
+  font-size: 11px;
+}
+body.nav-over-hero nav .nav-right .year {
+  color: rgba(244, 237, 222, 0.95);
+}
+body.nav-over-hero nav .nav-right .year em {
+  color: #e8cf8d;
+}
+body.nav-over-hero nav .nav-right .year .year-am,
+body.nav-over-hero nav .nav-right .year .year-greg {
+  color: rgba(244, 237, 222, 0.78);
+}
+body.nav-over-hero nav .nav-right .year .year-sep {
+  color: rgba(244, 237, 222, 0.5);
+}
+
+/* CTA — is required here to win over the generic
+   .cta-button base rules used elsewhere on the page. */
+nav .nav-right .cta-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  padding: 0 22px;
+  background: #8b1818;
+  color: #f5ead7;
+  border: none;
+  border-radius: 999px;
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 0 4px 12px -4px rgba(139, 24, 24, 0.6);
+  transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+}
+nav .nav-right .cta-button::before,
+nav .nav-right .cta-button::after { display: none; }
+nav .nav-right .cta-button:hover {
+  background: #a01d1d;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px -4px rgba(160, 29, 29, 0.7);
+}
+
+/* Hamburger — hidden on desktop, revealed at the mobile breakpoint. */
+nav .nav-hamburger {
+  display: none;
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  border: 1px solid rgba(26, 20, 19, 0.22);
+  border-radius: 1px;
+  cursor: pointer;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  transition: border-color 320ms ease, background 320ms ease;
+}
+nav .nav-hamburger-line {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--ink);
+  border-radius: 1px;
+  transition: background 320ms ease;
+}
+nav .nav-hamburger:hover {
+  border-color: var(--crimson);
+}
+nav .nav-hamburger:hover .nav-hamburger-line {
+  background: var(--crimson);
+}
+body.nav-over-hero nav .nav-hamburger {
+  border-color: rgba(244, 237, 222, 0.55);
+}
+body.nav-over-hero nav .nav-hamburger-line {
+  background: rgba(244, 237, 222, 0.96);
+}
+
+/* ── Focus-visible — crisp, on-brand */
+nav .nav-links a:focus-visible,
+nav .cta-button:focus-visible,
+nav .nav-hamburger:focus-visible {
+  outline: 2px solid var(--crimson);
+  outline-offset: 4px;
+  border-radius: 1px;
+}
+body.nav-over-hero nav .nav-links a:focus-visible,
+body.nav-over-hero nav .nav-hamburger:focus-visible {
+  outline-color: rgba(244, 237, 222, 0.95);
+}
+
+/* ── Mobile: hide links, show hamburger, compact year & CTA ── */
+@media (max-width: 900px) {
+  nav {
+    height: 60px;
+    gap: 12px;
+    padding: 1px 16px 0;
+  }
+  nav .nav-links { display: none; }
+  nav .nav-hamburger { display: inline-flex; }
+  nav .nav-right { gap: 12px; }
+  nav .nav-right .year { font-size: 12px; }
+  nav .nav-right .year .year-sep,
+  nav .nav-right .year .year-greg { display: none; }
+  nav .nav-right .cta-button {
+    height: 34px;
+    padding: 0 14px;
+    font-size: 10px;
+  }
+  body { padding-top: 60px; }
+  section.hero { margin-top: -60px; }
+}
+
+/* Reduced motion — kill the underline / colour tween. */
+@media (prefers-reduced-motion: reduce) {
+  nav,
+  nav .nav-links a,
+  nav .nav-links a > span::after,
+  nav .nav-right .year,
+  nav .logo img {
+    transition: none !important;
+  }
+}
+
+

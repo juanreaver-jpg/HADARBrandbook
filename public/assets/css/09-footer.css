@@ -1,0 +1,145 @@
+/* ═════════════════════════════════════════════════════════════════════
+   FOOTER
+   ═════════════════════════════════════════════════════════════════════ */
+
+footer {
+  background: transparent;
+  color: var(--cream);
+  padding: 0;
+  position: relative;
+  overflow: visible;
+  text-align: left;
+  z-index: 1;
+}
+
+footer::before {
+  content: none;
+}
+
+footer::after {
+  content: none;
+}
+
+.footer-wrap {
+  position: relative;
+  z-index: 1;
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 var(--pad-page) 56px;
+}
+
+/* The legacy .footer-grid / .footer-col h3 / .footer-col p / .footer-col a
+   base rules were removed: the only <footer> in the markup is
+   .footer-colophon, and the COLOPHON FOOTER block further down hides every
+   .footer-grid / .footer-col* child with display:none. The (also-dead)
+   'footer-container' typo selector was dropped at the same time. */
+
+.footer-bottom {
+  border-top: 1px solid rgba(244, 237, 222, 0.12);
+  padding-top: 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--sans);
+  font-size: 12px;
+  opacity: 0.5;
+}
+
+/* I. FOOTER — brighten the crest and lift the tagline
+   (consolidated into base FOOTER; was an override block). */
+.footer-logo { opacity: 1; }
+.footer-logo img {
+  filter: brightness(0) invert(1)
+          drop-shadow(0 0 18px rgba(244, 237, 222, 0.18));
+  opacity: 0.96;
+}
+.footer-col:first-child > p:first-of-type {
+  font-family: var(--serif);
+  font-size: 17px;
+  line-height: 1.45;
+  letter-spacing: -0.005em;
+  color: rgba(244, 237, 222, 0.94);
+  opacity: 1;
+  margin-bottom: 22px;
+  max-width: 280px;
+}
+
+.footer-colophon .colophon-subhead {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 15px;
+  line-height: 1.5;
+  letter-spacing: 0.005em;
+  margin: 14px 0 0;
+  color: rgba(244, 237, 222, 0.72);
+  opacity: 1;
+}
+
+.footer-colophon .colophon-columns {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(32px, 6vw, 96px);
+  max-width: 760px;
+  margin: 8px auto 40px;
+  padding: 0 var(--pad-page);
+  text-align: center;
+}
+
+.footer-colophon .colophon-column h4.colophon-column-label {
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(244, 237, 222, 0.55);
+  margin: 0 0 18px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(244, 237, 222, 0.12);
+}
+
+.footer-colophon .colophon-column ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer-colophon .colophon-column li {
+  margin: 0;
+}
+
+.footer-colophon .colophon-column a {
+  font-family: var(--serif);
+  font-size: 15px;
+  line-height: 1.4;
+  color: rgba(244, 237, 222, 0.78);
+  text-decoration: none;
+  transition: color 320ms ease;
+}
+
+.footer-colophon .colophon-column a:hover {
+  color: rgba(244, 237, 222, 0.98);
+}
+
+.footer-colophon .colophon-established {
+  text-align: center;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 13px;
+  line-height: 1.6;
+  letter-spacing: 0.01em;
+  margin: 0 auto 24px;
+  padding: 0 var(--pad-page);
+  color: rgba(244, 237, 222, 0.55);
+}
+
+@media (max-width: 720px) {
+  .footer-colophon .colophon-columns {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    text-align: center;
+  }
+}
+

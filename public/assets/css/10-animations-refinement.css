@@ -1,0 +1,353 @@
+/* ═════════════════════════════════════════════════════════════════════
+   ANIMATIONS & REVEAL — PREMIUM REFINEMENT
+   ═════════════════════════════════════════════════════════════════════ */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 800ms var(--ease),
+              transform 800ms var(--ease);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger animation for child elements */
+.stagger > * {
+  transition-delay: calc(var(--i, 0) * 0.15s);
+}
+
+/* Button hover refinement */
+.cta-button {
+  transition: all var(--dur-base) var(--ease);
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-button::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.1);
+  opacity: 0;
+  transition: opacity var(--dur-base) var(--ease);
+  z-index: 0;
+}
+
+.cta-button:hover::before {
+  opacity: 1;
+}
+
+.cta-button:active {
+  transform: scale(0.98);
+}
+
+/* Keyboard focus styles */
+
+.cta-button:focus-visible,
+.day-schedule-item:focus-visible {
+  outline: 3px solid var(--crimson);
+  outline-offset: 2px;
+}
+/* (.gallery-dot / .gallery-nav focus-visible outline and .gallery-item
+   premium hover moved to 'GALLERY -- single authoritative block'
+   further down in this file.) */
+
+/* Book card 3D hover */
+.book-card {
+  transition: transform 450ms var(--ease), box-shadow 450ms var(--ease), border-color 450ms var(--ease);
+}
+
+.book-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 16px 38px rgba(26, 20, 19, 0.16);
+  border-color: rgba(140, 28, 43, 0.22);
+}
+
+/* (moved to 'COVENANT -- single authoritative block' further down in this file.) */
+
+/* Link hover underline animation */
+a {
+  position: relative;
+}
+
+.day-header-link a::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--crimson);
+  transition: width var(--dur-base) var(--ease);
+}
+
+.day-header-link a:hover::after {
+  width: 100%;
+}
+
+/* Reduced motion support */
+
+@media (prefers-reduced-motion: reduce){
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .reveal,
+  .reveal.visible {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+
+@media (max-width: 1200px){
+  .hero {
+    grid-template-columns: 1fr;
+  }
+
+  .covenant-container {
+    grid-template-columns: 1fr;
+    gap: 60px;
+  }
+
+  .covenant-image {
+    position: static;
+    height: 400px;
+  }
+
+  .day-body {
+    grid-template-columns: 1fr;
+  }
+
+  .day-media {
+    position: relative;
+    top: auto;
+  }
+
+  .day-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .day-grid-item.large {
+    grid-row: 1 / 3;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .figure-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+
+@media (max-width: 768px){
+  .day-header {
+    flex-direction: column;
+  }
+
+  .day-header h2 {
+    max-width: 100%;
+  }
+
+  .day-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+  }
+
+  .day-grid-item,
+  .day-grid-item.large {
+    min-height: 280px;
+    grid-row: auto;
+  }
+
+  .pillars-grid {
+    grid-template-columns: 1fr;      }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+    gap: 16px;
+  }
+
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .figure-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+
+  .figure-card {
+    min-height: 120px;
+    font-size: 14px;
+  }
+
+  .book-card {
+    width: 100px;
+    height: 150px;
+  }
+
+  .transition {
+    padding: 120px var(--pad-page);
+  }
+
+  .transition h2 {
+    font-size: clamp(32px, 6vw, 48px);
+  }
+
+  .admissions h2 {
+    font-size: clamp(32px, 6vw, 48px);
+  }
+}
+
+
+@media (max-width: 600px){
+  .gallery-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .book-card {
+    width: 90px;
+    height: 135px;
+  }
+
+  .cream-tongue {
+    font-size: 24px;
+    padding: 16px 24px;
+  }
+
+  .day-header h2,
+  .admissions h2 {
+    font-size: clamp(28px, 6vw, 42px);
+  }
+
+  .figure-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .figure-card {
+    min-height: 100px;
+    padding: 16px;
+    font-size: 12px;
+  }
+
+  .transition h2 {
+    font-size: clamp(24px, 5vw, 36px);
+    margin-bottom: 32px;
+  }
+
+  .hero {
+    min-height: auto;
+  }
+
+  .hero-inner {
+    min-height: auto;
+    padding: 72px var(--pad-page) 60px;
+  }
+
+  .hero-panel {
+    max-width: 100%;
+  }
+
+  .hero-panel p {
+    max-width: 100%;
+  }
+
+  .day-schedule-item {
+    grid-template-columns: 60px 1fr;
+    gap: 16px;
+    padding: 12px 0;
+  }
+}
+
+
+@media (prefers-reduced-motion: reduce){
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+  
+
+/* OVERRIDES: reading culture */
+
+/* Mobile animation optimizations */
+.text-motion .premium-word {
+  animation: none;
+  opacity: 1;
+  transform: none;
+}
+
+.hero-left,
+.hero-right,
+.proof-strip,
+.pillar-card,    .gallery-item,
+.book-card {
+  animation: none;
+}
+
+/* GPU acceleration hints for remaining animations */
+
+.gallery-dot {
+  will-change: auto;
+}
+
+/* ═════════════════════════════════════════════════════════════════════
+   (curriculum editorial styles removed; see .cur-* block below)
+   ═════════════════════════════════════════════════════════════════════ */
+
+
+  /* === Reading culture final polish: hover shelf + premium featured volume === */
+  /* === Reading culture: featured volume as premium book object === */
+  /* === Library: distinct room treatment === */
+
+
+  /* A Day at Hadar: image motion restricted to fade + blur only. */
+  .day-section .day-grid-item,
+  .day-section .day-grid-item.reveal,
+  .day-section .day-grid-item.reveal.visible {
+transform: none;
+transition: none !important;
+  }
+
+  .day-section .day-grid-item.reveal {
+animation: dayImageFadeIn 900ms ease both;
+  }
+
+  .day-section .day-grid-item::after {
+transform: none;
+animation: none;
+filter: blur(0);
+transition: opacity 520ms ease, filter 520ms ease;
+  }
+
+  .day-section .day-grid-item.is-switching::after {
+opacity: 0.24;
+filter: blur(10px);
+  }
+
+  .day-section .day-grid:hover .day-grid-item.large {
+transform: none !important;
+filter: none !important;
+box-shadow: 0 28px 70px rgba(26, 20, 19, 0.12) !important;
+  }
+
+  @keyframes dayImageFadeIn {
+from { opacity: 0; }
+to { opacity: 1; }
+  }
+
+  /* Reading Culture: smoother lib-cover hover transition. */
+

@@ -1,0 +1,1038 @@
+/* ═════════════════════════════════════════════════════════════════════
+   SYSTEMATIC POLISH PASS
+   ═════════════════════════════════════════════════════════════════════ */
+
+/* A. COLOR DISCIPLINE */
+
+/* (moved to 'COVENANT -- single authoritative block' further down in this file.) */
+
+.day-schedule-label {
+  color: rgba(43, 77, 122, 0.72);
+}
+.divider {
+  background: rgba(184, 132, 42, 0.70);
+  opacity: 0.85;
+}
+.day-schedule-item.is-active::before,
+.day-schedule-item:hover::before,
+.day-schedule-item:focus-visible::before {
+  background: #2b4d7a;
+}
+.day-schedule-item.is-active .day-time,
+.day-schedule-item:hover .day-time,
+.day-schedule-item:focus-visible .day-time,
+.day-schedule-item.is-active::after,
+.day-schedule-item:hover::after,
+.day-schedule-item:focus-visible::after {
+  color: #2b4d7a;
+}
+/* (moved to 'COVENANT -- single authoritative block' further down in this file.) */
+.day-header-link a {
+  color: #2b4d7a;
+  opacity: 0.88;
+}
+.day-header-link a::after {
+  background: rgba(43, 77, 122, 0.55);
+}
+
+/* B. STANDARDIZE KICKERS */
+.eyebrow {
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+/* (moved to 'HERO -- single authoritative block' further down in this file.) */
+
+
+/* (moved to 'COVENANT -- single authoritative block' further down in this file.) */
+/* F. TRANSITION RIGHT COLUMN — demote to a quiet print-mark */
+.transition-copy {
+  max-width: 320px;
+  opacity: 0.7;
+}
+.transition-copy h2 {
+  font-size: clamp(11px, 0.9vw, 13px);
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  font-family: var(--sans);
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.6;
+  color: rgba(244, 237, 222, 0.78);
+  text-shadow: none;
+}
+.transition-copy h2 em {
+  color: rgba(232, 207, 141, 0.92);
+  font-style: normal;
+}
+
+/* G. DAY second engraving — soften right edge */
+.day-grid-item:nth-child(2) {
+  -webkit-mask-image: linear-gradient(90deg,
+    #000 0%, #000 78%, rgba(0, 0, 0, 0.5) 100%);
+          mask-image: linear-gradient(90deg,
+    #000 0%, #000 78%, rgba(0, 0, 0, 0.5) 100%);
+}
+.day-schedule-label {
+  font-size: 10px;
+  letter-spacing: 0.30em;
+  color: rgba(26, 20, 19, 0.46);
+  font-weight: 500;
+}
+
+/* H. ADMISSIONS CTAs — clear primary vs ghost */
+.admissions-cta-row .cta-button--primary {
+  padding: 20px 42px;
+  font-size: 13px;
+  letter-spacing: 0.22em;
+  background: var(--cream);
+  color: var(--crimson);
+  border: 1px solid var(--cream);
+  box-shadow: 0 18px 40px -14px rgba(0, 0, 0, 0.45);
+}
+.admissions-cta-row .cta-button--ghost {
+  padding: 19px 30px;
+  font-size: 12px;
+  letter-spacing: 0.20em;
+  background: transparent;
+  color: rgba(244, 237, 222, 0.82);
+  border: 1px solid rgba(244, 237, 222, 0.32);
+  box-shadow: none;
+}
+.admissions-cta-row .cta-button--ghost:hover {
+  color: var(--cream);
+  border-color: rgba(244, 237, 222, 0.62);
+  background: rgba(244, 237, 222, 0.06);
+}
+
+/* (moved to 'FOOTER -- single authoritative block' further down in this file.) */
+
+/* (moved to 'COVENANT -- single authoritative block' further down in this file.) */
+
+/* ═══════════════════════════════════════════════════════════════════
+   ELEGANCE PASS (Task #13) — museum-quality, restrained editorial.
+   Applied as a final layer so it cleanly overrides the earlier
+   cascade. Covers crest treatment, navbar composition, active-section
+   indication, year marker, hamburger affordance, gallery controls,
+   reveal tightening, ambient motion calming, section seams, body-type
+   rhythm, colophon footer, and reduced-motion respect.
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* Navbar styles moved to the single authoritative block further
+   down — search for "NAVBAR — single authoritative block". */
+
+/* (moved to 'HERO -- single authoritative block' further down in this file.) */
+
+/* — Section seams: crest chapter marks between major sections — */
+.section-seam {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(20px, 3vw, 44px);
+  padding: clamp(28px, 4.4vh, 48px) var(--pad-page);
+  background: var(--parchment);
+  position: relative;
+  z-index: 1;
+}
+.section-seam-rule {
+  display: block;
+  flex: 1 1 auto;
+  max-width: clamp(120px, 22vw, 280px);
+  height: 1px;
+  background: linear-gradient(90deg,
+    rgba(26, 20, 19, 0) 0%,
+    rgba(26, 20, 19, 0.18) 50%,
+    rgba(26, 20, 19, 0) 100%);
+}
+.section-seam-crest {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 38px;
+  flex-shrink: 0;
+  opacity: 0.7;
+}
+.section-seam-crest img {
+  height: 100%;
+  width: auto;
+  display: block;
+}
+/* The seam between Day and Founders sits on parchment then transitions into deep blue;
+   give it a vignette so the transition feels like a page turn. */
+.section-seam + .transition {
+  background-image: linear-gradient(180deg, rgba(248, 242, 232, 1) 0%, rgba(22, 41, 79, 0) 1.4%), linear-gradient(135deg, #16294f 0%, #1f3a6b 100%);
+}
+
+/* — TRANSITION / Founders Canon: keep the lower copy slot empty — */
+.transition-copy { display: none; }
+
+/* (moved to 'HERO -- single authoritative block' further down in this file.) */
+/* (moved to 'COVENANT -- single authoritative block' further down in this file.) */
+/* — TIGHTENED SCROLL REVEALS — */
+.reveal {
+  transform: translateY(16px);
+  transition:
+    opacity 520ms cubic-bezier(0.22, 0.61, 0.36, 1),
+    transform 560ms cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+.reveal.visible,
+.reveal.is-in-initial-viewport {
+  opacity: 1;
+  transform: translateY(0);
+}
+/* Items already in the initial viewport don't animate in. */
+.reveal.is-in-initial-viewport {
+  transition: none;
+}
+/* The premium text motion (per-word) is reserved for hero + library headline. */
+.text-motion {
+  --premium-stagger: 30ms;
+  --premium-rise: 0.5em;
+}
+/* Disable per-word stagger on generic body paragraphs / minor elements. */
+.covenant-text p .premium-word,
+.day-schedule-label .premium-word,
+.day-header-link .premium-word,
+.gallery-caption .premium-word,
+.gallery-counter .premium-word,
+.footer-col .premium-word,
+.footer-bottom .premium-word {
+  transition: none;
+  transform: none;
+  opacity: 1;
+}
+
+/* — EDITORIAL BODY TYPE RHYTHM — */
+
+/* (moved to 'COVENANT -- single authoritative block' further down in this file.) */
+
+/* (moved to 'GALLERY -- single authoritative block' further down in this file.) */
+
+/* — DAY image cross-fade (no movement, opacity only) — */
+.day-grid-item {
+  transition: opacity 420ms cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+.day-grid-item.is-switching {
+  opacity: 0.55;
+}
+
+
+/* — Text-link hairline underline (no opacity flash) — */
+.day-header-link a {
+  position: relative;
+  padding-bottom: 4px;
+  opacity: 1;
+}
+.day-header-link a::after {
+  transition: width 320ms cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+/* — COLOPHON FOOTER — */
+.footer-colophon { padding-top: 24px; }
+.footer-colophon .footer-grid,
+.footer-colophon .footer-col,
+.footer-colophon .footer-col h3,
+.footer-colophon .footer-col a:not(.colophon-crest),
+.footer-colophon .footer-col p {
+  display: none;
+}
+.footer-colophon .colophon-mark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(24px, 4vw, 56px);
+  margin: 8px 0 36px;
+  padding: 0 var(--pad-page);
+}
+.footer-colophon .colophon-rule {
+  flex: 1 1 auto;
+  max-width: clamp(120px, 22vw, 280px);
+  height: 1px;
+  background: linear-gradient(90deg,
+    rgba(244, 237, 222, 0) 0%,
+    rgba(244, 237, 222, 0.22) 50%,
+    rgba(244, 237, 222, 0) 100%);
+}
+.footer-colophon .colophon-crest {
+  height: 56px;
+  display: inline-flex;
+  align-items: center;
+  opacity: 1;
+  margin: 0;
+  padding: 0;
+}
+.footer-colophon .colophon-crest img {
+  filter: brightness(0) invert(1) drop-shadow(0 0 18px rgba(244, 237, 222, 0.16));
+  opacity: 0.96;
+  height: 100%;
+  width: auto;
+}
+.footer-colophon .colophon-body {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto 36px;
+  padding: 0 var(--pad-page);
+  color: rgba(244, 237, 222, 0.88);
+}
+.footer-colophon .colophon-tagline {
+  font-family: var(--serif);
+  font-size: 22px;
+  line-height: 1.4;
+  margin: 0 0 22px;
+  color: rgba(244, 237, 222, 0.96);
+  opacity: 1;
+}
+.footer-colophon .colophon-tagline em {
+  font-style: italic;
+  color: #e8cf8d;
+}
+.footer-colophon .colophon-set {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 14px;
+  line-height: 1.6;
+  letter-spacing: 0.01em;
+  margin: 0 0 12px;
+  color: rgba(244, 237, 222, 0.7);
+  opacity: 1;
+}
+.footer-colophon .colophon-address {
+  font-family: var(--sans);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  margin: 0;
+  color: rgba(244, 237, 222, 0.5);
+  opacity: 1;
+}
+.footer-colophon .colophon-address a {
+  color: rgba(244, 237, 222, 0.85);
+  border-bottom: 1px solid rgba(244, 237, 222, 0.28);
+  padding-bottom: 1px;
+  margin: 0;
+  display: inline;
+}
+.footer-colophon .colophon-utility {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 10px 16px;
+  padding: 0 var(--pad-page);
+  margin: 0 auto 28px;
+  font-family: var(--sans);
+  font-size: 10px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+}
+.footer-colophon .colophon-utility a {
+  color: rgba(244, 237, 222, 0.6);
+  display: inline;
+  margin: 0;
+  transition: color 320ms ease;
+}
+.footer-colophon .colophon-utility a:hover {
+  color: rgba(244, 237, 222, 0.95);
+  opacity: 1;
+}
+.footer-colophon .colophon-utility span {
+  color: rgba(244, 237, 222, 0.3);
+}
+.footer-colophon .footer-bottom {
+  border-top: 1px solid rgba(244, 237, 222, 0.10);
+  padding: 24px var(--pad-page) 8px;
+  justify-content: center;
+  font-family: var(--sans);
+  font-size: 10px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(244, 237, 222, 0.4);
+}
+
+/* (FOOTER override block consolidated into the base FOOTER section
+   near line ~1630. No standalone authoritative block remains here.) */
+
+
+/* — Mobile non-nav refinements (nav mobile rules live in the
+     consolidated navbar block earlier in this file) — */
+
+@media (max-width: 900px){
+  .hero-crest {
+    height: clamp(300px, 42vw, 460px);
+    margin-bottom: 26px;
+  }
+  .section-seam {
+    padding: 28px var(--pad-page);
+    gap: 14px;
+  }
+  .section-seam-crest { height: 28px; }
+  .section-seam-rule { max-width: 80px; }
+  .footer-colophon .colophon-crest { height: 44px; }
+  .footer-colophon .colophon-tagline { font-size: 19px; }
+  .gallery-meta { flex-direction: column; align-items: flex-start; }
+  .gallery-meta .gallery-caption {
+    max-width: 100%;
+    text-align: left;
+  }
+}
+
+/* — Reduced motion: full stillness; fades only — */
+
+@media (prefers-reduced-motion: reduce){
+
+  .hero-crest img,
+.hero::before,
+.hero::after,
+.covenant-image,
+.transition::before,
+.gallery-slide img {
+    animation: none !important;
+  }
+  .hero-crest {
+    opacity: 0.96 !important;
+    transform: none !important;
+    transition: opacity 180ms ease !important;
+  }
+  .reveal,
+  .reveal.visible {
+    transform: none !important;
+    transition: opacity 180ms ease !important;
+  }
+  .text-motion .premium-word {
+    transition: opacity 180ms ease !important;
+    transform: none !important;
+  }
+  nav .nav-links a > span::after,
+  .cta-button::before {
+    transition: none !important;
+  }
+}
+
+/* Transition library image: brighten */
+.transition::before {
+  filter: saturate(1.02) contrast(1.04) brightness(1.06);
+}
+.transition-hero {
+  height: min(82vh, 960px);
+}
+.transition-panel {
+  justify-content: flex-start;
+  padding-top: clamp(56px, 7vh, 96px);
+}
+.transition-copy {
+  margin-top: auto;
+}
+
+/* ─── Library highlights: force bright bronze regardless of per-book
+   accent so dark accents (crimson/brown) don't mesh with the dark bg ─── */
+
+
+
+/* Admissions: swap red/blue gradient for the warm library brown palette */
+.admissions {
+  background: #2b1715;
+}
+.admissions::after {
+  background:
+    radial-gradient(ellipse 72% 60% at 50% 40%,
+      rgba(217, 168, 74, 0.16) 0%,
+      rgba(184, 132, 42, 0.08) 38%,
+      rgba(43, 23, 21, 0) 72%),
+    radial-gradient(circle at 14% 78%,
+      rgba(184, 132, 42, 0.16) 0%,
+      rgba(184, 132, 42, 0) 34%),
+    linear-gradient(180deg,
+      #2b1715 0%,
+      #3a2019 52%,
+      #231514 100%);
+}
+.admissions::before {
+  opacity: 0.22;
+  filter: saturate(0.9) contrast(1.05) brightness(0.78);
+}
+
+/* (moved to 'HERO -- single authoritative block' further down in this file.) */
+
+/* Day section: drop the two side thumbnails — only show the hero image */
+.day-section .day-grid-item#dayThumbOne,
+.day-section .day-grid-item#dayThumbTwo { display: none; }
+.day-section .day-grid {
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
+  gap: 0;
+}
+.day-section .day-grid-item.large {
+  grid-column: 1 / -1;
+  grid-row: auto;
+  width: 100%;
+}
+
+
+
+/* Library: "As It Was Written" eyebrow was dark blue on the dark brown
+   background — swap it to bronze for legibility */
+
+/* ─────────────────────────────────────────────────────────────────────
+   LIBRARY DISPLAY — rework
+   1. Lift "Now reading" label OUT of the book; pin it above the cover
+      with breathing room so it never sits on artwork.
+   2. Resize book so it always fits inside the scene (no more cropping).
+   3. Deeper 3D: wider spine, thicker page block, slight rotateX tilt,
+      richer drop shadow + larger blurred floor shadow.
+   ───────────────────────────────────────────────────────────────────── */
+
+/* "NOW READING" label — sits in the new top padding, well clear of book */
+
+/* Book sizing — tighter so it lives inside the scene */
+/* Spine: wider with deeper gradient + carved inset highlights */
+
+/* Pages: thicker stack with subtle inset shadow for depth */
+
+/* Cover: richer multi-layer shadow for grounded depth */
+
+/* Floor shadow: longer, softer, centered under the book */
+
+/* Book-switch animation — match the new 3D transform baseline */
+/* Switch — cover image just dims; book pose stays still so the
+   idle breathing keeps running and nothing snaps. */
+/* Flip-in — a soft brightness lift + tiny lift, NO transform
+   conflict with the idle animation. */
+/* Hide the editorial-notes tag pills (BEAST ACADEMY, COMPETITIONS, etc.) */
+
+/* Contrast fix: dark-navy eyebrows are invisible on the library's brown
+   background. Re-color anything that sits on the dark library scene to
+   the bronze accent so it reads cleanly. */
+
+/* A DAY AT HADAR — elegant reveal + clean swap.
+   Reveal anchored to the whole section (not individual rows) so moving
+   between rows feels continuous. The JS "is-switching" blur/opacity dip
+   is killed in favour of a much subtler crossfade. */
+.day-section .day-grid-item.large {
+  opacity: 0;
+  transform: none;
+  transition: opacity 760ms cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+  will-change: opacity;
+}
+.day-section:hover .day-grid-item.large,
+.day-section:focus-within .day-grid-item.large {
+  opacity: 1;
+}
+.day-section .day-grid-item.is-switching::after,
+.day-section .day-grid-item.large.is-switching {
+  filter: none;
+  opacity: 1;
+}
+.day-section .day-grid-item::after {
+  transition: opacity 420ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.day-section .day-grid-item.large.is-switching::after {
+  opacity: 0.78;
+}
+
+/* ─────────────────────────────────────────────────────────────────────
+   COVENANT — full-bleed cinematic treatment.
+   The Moses plate becomes the section. A right-anchored scrim keeps
+   the figure legible on the left while text reads cleanly on the right.
+   ───────────────────────────────────────────────────────────────────── */
+.covenant {
+  padding: 0;
+  background:
+    radial-gradient(ellipse at 78% 50%, rgba(10, 8, 7, 0.78) 0%, rgba(10, 8, 7, 0.55) 32%, rgba(10, 8, 7, 0.08) 62%, rgba(10, 8, 7, 0) 78%),
+    linear-gradient(180deg, rgba(10, 8, 7, 0.55) 0%, rgba(10, 8, 7, 0) 22%, rgba(10, 8, 7, 0) 78%, rgba(10, 8, 7, 0.55) 100%),
+    url('../Gemini_Assets/Moses_full.png') center 28% / cover no-repeat,
+    #1a1413;
+  min-height: min(96vh, 880px);
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+.covenant::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(10, 8, 7, 0) 38%, rgba(10, 8, 7, 0.35) 72%, rgba(10, 8, 7, 0.65) 100%),
+    radial-gradient(circle at 8% 90%, rgba(10, 8, 7, 0.45) 0%, rgba(10, 8, 7, 0) 38%);
+  pointer-events: none;
+  z-index: 1;
+}
+.covenant-container {
+  max-width: 1360px;
+  width: 100%;
+  margin: 0 auto;
+  padding: clamp(80px, 12vh, 140px) clamp(28px, 6vw, 96px);
+  grid-template-columns: 1fr;
+  gap: 0;
+  position: relative;
+  z-index: 2;
+}
+.covenant-image { display: none; }
+.covenant-text {
+  max-width: 540px;
+  margin-left: auto;
+  margin-right: 0;
+  padding-left: 0;
+  border-left: 0;
+}
+.covenant-text .eyebrow {
+  color: #d9a84a;
+  letter-spacing: 0.36em;
+  text-shadow: 0 1px 18px rgba(0, 0, 0, 0.5);
+}
+.covenant-text h2 {
+  color: #f4eddc;
+  text-shadow: 0 2px 28px rgba(0, 0, 0, 0.55);
+  max-width: 520px;
+}
+.covenant-text h2 em {
+  color: #e8b964;
+}
+.covenant-text p {
+  color: rgba(244, 237, 222, 0.86);
+  text-shadow: 0 1px 16px rgba(0, 0, 0, 0.55);
+  max-width: 500px;
+}
+.covenant-text .divider {
+  background: rgba(217, 168, 74, 0.7);
+  opacity: 1;
+}
+
+@media (max-width: 760px){
+  .covenant {
+    background:
+      linear-gradient(180deg, rgba(10, 8, 7, 0.25) 0%, rgba(10, 8, 7, 0.78) 62%, rgba(10, 8, 7, 0.9) 100%),
+      url('../Gemini_Assets/Moses_full.png') center top / cover no-repeat,
+      #1a1413;
+    min-height: 92vh;
+    align-items: flex-end;
+  }
+  .covenant::before { display: none; }
+  .covenant-text { max-width: 100%; margin-left: 0; }
+}
+
+/* ─────────────────────────────────────────────────────────────────────
+   THREE PILLARS — editorial spread.
+   Asymmetric editorial layout where the imagery is the structural
+   anchor (always visible at ~5/12 of the column), an oversized italic
+   roman numeral sits as a hanging drop-cap on the body column, and
+   the three bands zigzag (image left → right → left) so the spread
+   reads as one composition rather than three repeated cards.
+   ───────────────────────────────────────────────────────────────────── */
+.tp-section {
+  background: var(--parchment);
+  padding: clamp(96px, 13vh, 168px) var(--pad-page);
+}
+.tp-inner {
+  max-width: 1240px;
+  margin: 0 auto;
+}
+.tp-intro {
+  text-align: center;
+  max-width: 760px;
+  margin: 0 auto clamp(72px, 10vh, 120px);
+}
+.tp-intro .eyebrow {
+  margin-bottom: 18px;
+}
+.tp-intro h2 {
+  margin: 0 auto;
+  max-width: 16ch;
+}
+.tp-intro h2 em {
+  font-style: italic;
+  color: #d9a84a;
+}
+.tp-stack {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(80px, 12vh, 144px);
+}
+.tp-band {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  grid-template-areas: "figure body";
+  column-gap: clamp(48px, 7vw, 112px);
+  align-items: center;
+  padding-top: clamp(40px, 5vh, 64px);
+}
+.tp-band::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: rgba(184, 132, 42, 0.55);
+}
+.tp-band--flip {
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  grid-template-areas: "body figure";
+}
+.tp-figure {
+  grid-area: figure;
+  position: relative;
+  margin: 0;
+}
+.tp-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  background: var(--ivory);
+  box-shadow:
+    0 0 0 8px var(--ivory),
+    0 0 0 9px rgba(26, 20, 19, 0.06),
+    0 22px 56px rgba(26, 20, 19, 0.16);
+}
+.tp-figure::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(140deg, rgba(248, 242, 232, 0.06) 0%, rgba(26, 20, 19, 0.08) 100%);
+  mix-blend-mode: multiply;
+}
+.tp-body {
+  grid-area: body;
+  max-width: 56ch;
+}
+.tp-band--flip .tp-body {
+  justify-self: end;
+}
+.tp-numeral {
+  display: block;
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(120px, 17vw, 240px);
+  line-height: 0.78;
+  color: #d9a84a;
+  letter-spacing: -0.04em;
+  margin: 0 0 0.04em -0.08em;
+  text-shadow: 0 6px 22px rgba(140, 28, 43, 0.10);
+  user-select: none;
+}
+.tp-band--flip .tp-numeral {
+  text-align: right;
+  margin: 0 -0.08em 0.04em 0;
+}
+.tp-tag {
+  display: inline-block;
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--crimson);
+  margin-bottom: 14px;
+}
+.tp-band--flip .tp-tag {
+  float: right;
+  clear: both;
+}
+.tp-body h3 {
+  margin: 0 0 22px;
+  font-size: clamp(40px, 3.6vw, 60px);
+  font-weight: 500;
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+  clear: both;
+}
+.tp-quote {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(17px, 1.4vw, 20px);
+  line-height: 1.5;
+  color: var(--crimson);
+  margin: 0 0 24px;
+  padding-left: 18px;
+  border-left: 2px solid rgba(140, 28, 43, 0.5);
+  max-width: 48ch;
+}
+.tp-band--flip .tp-quote {
+  padding-left: 0;
+  padding-right: 18px;
+  border-left: 0;
+  border-right: 2px solid rgba(140, 28, 43, 0.5);
+  text-align: right;
+  margin-left: auto;
+}
+.tp-body p {
+  font-family: var(--serif);
+  font-size: clamp(16px, 1.2vw, 18px);
+  line-height: 1.62;
+  color: #3b3631;
+  margin: 0;
+  max-width: 58ch;
+}
+.tp-band--flip .tp-body p {
+  margin-left: auto;
+  text-align: right;
+}
+
+/* Reveal: figure rises and fades, body slides in from its side. */
+.tp-band .tp-figure,
+.tp-band .tp-body {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity var(--dur-xslow) var(--ease),
+    transform var(--dur-xslow) var(--ease);
+}
+.tp-band .tp-body { transition-delay: 120ms; }
+.tp-band.visible .tp-figure,
+.tp-band.visible .tp-body {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Tablet: keep the figure at full weight but unify direction so the
+   layout doesn't feel cramped. Body sits below figure on each band. */
+
+@media (max-width: 960px){
+  .tp-band,
+  .tp-band--flip {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "figure"
+      "body";
+    row-gap: 36px;
+    padding-top: 36px;
+  }
+  .tp-figure img { aspect-ratio: 5 / 4; }
+  .tp-band--flip .tp-body,
+  .tp-band--flip .tp-numeral,
+  .tp-band--flip .tp-tag,
+  .tp-band--flip .tp-quote,
+  .tp-band--flip .tp-body p {
+    justify-self: start;
+    text-align: left;
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 18px;
+    padding-right: 0;
+    border-left: 2px solid rgba(140, 28, 43, 0.5);
+    border-right: 0;
+    float: none;
+  }
+  .tp-band--flip .tp-tag { padding-left: 0; border-left: 0; }
+  .tp-band--flip .tp-body h3,
+  .tp-band--flip .tp-numeral {
+    padding-left: 0;
+    border-left: 0;
+  }
+  .tp-stack { gap: clamp(64px, 9vh, 112px); }
+}
+
+
+@media (max-width: 640px){
+  .tp-section { padding: 80px var(--pad-page); }
+  .tp-intro { margin-bottom: 52px; }
+  .tp-numeral { font-size: clamp(96px, 26vw, 156px); }
+  .tp-body h3 { font-size: clamp(32px, 9vw, 44px); margin-bottom: 18px; }
+  .tp-quote { font-size: 16px; }
+  .tp-body p { font-size: 16px; }
+  .tp-figure img {
+    box-shadow:
+      0 0 0 6px var(--ivory),
+      0 14px 36px rgba(26, 20, 19, 0.14);
+  }
+}
+
+
+@media (prefers-reduced-motion: reduce){
+  .tp-band .tp-figure,
+  .tp-band .tp-body {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* (moved to 'GALLERY -- single authoritative block' further down in this file.) */
+  /* ─────────────────────────────────────────────────────────────────
+     RESPONSIVE POLISH — device verification corrections (May 5786)
+     ─ Covenant photo collapsed in tablet/phone grid (aspect-ratio
+       alone doesn't force inline-size in a centered grid cell).
+     ─ Curriculum spread stays multi-column on small tablets, squishing
+       the 3D book and index text into illegible slivers.
+     ─ Curriculum index tabs render 2 columns at phone widths, causing
+       Roman numerals to collide with neighbouring titles.
+     ─ Subject card eyebrow / caption overlay overflows the photo.
+     ─ Gallery caption inside .gallery-meta is absolutely positioned
+       (shared class with slide caption), drifting onto the next
+       section's dark background.
+     ───────────────────────────────────────────────────────────────── */
+
+
+  @media (max-width: 1120px){
+    .covenant-image { width: 100%; }
+
+    /* Tablet: the .gallery-meta .gallery-caption shares its class with
+       the slide overlay caption, so it inherits position: absolute and
+       drifts onto the next section. Anchor it back to flow & hide
+       since the slide already shows it. */
+    .gallery-meta .gallery-caption {
+      position: static;
+      left: auto; right: auto; bottom: auto;
+      color: #5a4b42;
+      text-shadow: none;
+      display: none;
+    }
+  }
+
+
+  @media (max-width: 760px){
+    .covenant-image { width: 100%; }
+
+    /* Keep the subject-card overlay text inside the photo. */
+
+    /* Gallery meta caption shares a class with the slide's absolute
+       overlay caption. Anchor the meta copy back to flow + readable
+       color on the cream background, and dedupe by hiding the text
+       since the slide already shows it. */
+    .gallery-meta { flex-direction: column; align-items: flex-start; }
+    .gallery-meta .gallery-caption {
+      position: static;
+      left: auto; right: auto; bottom: auto;
+      color: #5a4b42;
+      font-family: var(--sans);
+      font-size: 12px;
+      line-height: 1.4;
+      text-shadow: none;
+      display: none;
+    }
+
+    /* Curriculum index numerals get a hair more breathing room. */
+  }
+
+  
+/* ─────────────────────────────────────────────────────────────────────
+   LIBRARY HEADER — kill the dead space.
+   The previous grid (0.7fr / 0.3fr with a max-width:11ch headline)
+   left ~800px of empty brown between the headline and the subtitle.
+   Re-layout as a tight inline editorial pair: headline sits left,
+   subtitle docks immediately to its right on a shared baseline, and
+   the whole header caps at a sane width so the rule doesn't span the
+   full section. Also pull the entire library section up by trimming
+   the top padding.
+   ───────────────────────────────────────────────────────────────────── */
+/* Tighten the section opener so the rail/book content arrives sooner. */
+
+/* Gallery meta caption duplicates the slide's overlay caption (same
+   class name), and the text-motion JS shatters it into per-letter
+   spans that smear across the section. Hide it everywhere — the slide
+   overlay already shows the same label + line. */
+/* (moved to 'GALLERY -- single authoritative block' further down in this file.) */
+
+/* ─────────────────────────────────────────────────────────────────────
+   HERO → COVENANT seam.
+   The hero video ends on a varied scene (bright sky / foliage) and
+   the covenant section opens on a deep brown Moses plate, producing
+   a hard horizontal cut. Bleed the hero into a soft dark fade at its
+   base and let the covenant start with a matching dark wash so the
+   two sections meld instead of butting.
+   ───────────────────────────────────────────────────────────────────── */
+/* (moved to 'HERO -- single authoritative block' further down in this file.) */
+
+/* (moved to 'COVENANT -- single authoritative block' further down in this file.) */
+
+/* ═══════════════════════════════════════════════════════════════════
+   LIBRARY — full reorganization.
+   Problem: the section had a flat header pair with the subtitle pushed
+   far right behind a long hairline (dead space), a 790px-tall floating
+   book panel on the right with no metadata beside it, and a "Now
+   reading" tick floating awkwardly over the cover. Rich book data
+   (title, subtitle, category, quote) was loaded in JS but never shown.
+   Fix: stack the header (kicker → headline → small subtitle), let the
+   book sit at a more honest size, and place a proper editorial info
+   plate directly beneath it. Kicker "Now reading" moves into the info
+   plate as a quiet label so the cover is unobstructed.
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* Header: single editorial column, no right-anchored subtitle */
+
+/* Spread layout: keep two columns, tighten the gap and align tops */
+
+/* Right column: book sits above its info plate, equal axis */
+
+/* Scene: smaller, no longer hogging vertical space */
+
+/* "Now reading" — quiet kicker, no longer floats on the cover */
+
+/* Info plate — editorial, sits on the cream/dark plate beneath the book */
+
+/* Section padding: tighter rhythm — less dead space top + bottom */
+
+/* ═══════════════════════════════════════════════════════════════════
+   ANIMATION CALM-DOWN — quieter reveals & hover settles.
+   Reduces the per-element micro-jitter that reads as "jarring":
+     · Softer reveal distance + a slower, more inertial ease curve
+     · Reading-list hover: less padding jump, calmer indicator move
+     · Heading reveal: drop the letter-spacing tween that twitches
+     · Stagger spread: a touch wider so items don't all land at once
+   ═══════════════════════════════════════════════════════════════════ */
+.reveal {
+  transform: translateY(14px);
+  transition:
+    opacity 1100ms cubic-bezier(0.19, 1, 0.22, 1),
+    transform 1100ms cubic-bezier(0.19, 1, 0.22, 1);
+}
+.stagger > * { transition-delay: calc(var(--i, 0) * 0.18s); }
+
+/* Headings: kill the letter-spacing twitch — it micro-jitters during
+   the rise. Keep the rise + opacity, slow it slightly. */
+h1.reveal, h2.reveal {
+  animation: none;
+}
+h2.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 1100ms cubic-bezier(0.19, 1, 0.22, 1),
+    transform 1100ms cubic-bezier(0.19, 1, 0.22, 1);
+}
+h2.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Reading list rows: less padding jump on hover, slower & softer */
+
+/* The .lib-now-reading element is redundant now that the info plate
+   under the book carries the numeral + category; suppressing it keeps
+   the right column clean and unobstructed. */
+
+/* Pull the book a touch closer to the reading list so the spread
+   reads as one composition rather than two islands. */
+
+/* ═══════════════════════════════════════════════════════════════════
+   UNIFIED H2 EMPHASIS — every chapter headline now follows the
+   "Truth right from the *primary source.*" pattern: roman face for
+   the body of the line, italic + brand bronze gold for the
+   highlight word(s). Single rule wins over the prior per-section
+   color drift (some crimson, some inherit, some custom).
+   ═══════════════════════════════════════════════════════════════════ */
+
+section h2 em,
+.covenant-text h2 em,
+.day-header h2 em,
+.gallery-header h2 em,
+.transition-copy h2 em,
+.transition-label em,
+.admissions h2 em {
+  font-style: italic;
+  color: #d9a84a;
+  text-decoration: none;
+  font-weight: inherit;
+}
+
+/* (Earlier "NAV OVER HERO" block removed — fully replaced by the
+   consolidated navbar block further down.) */
+

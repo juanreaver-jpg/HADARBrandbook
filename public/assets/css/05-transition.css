@@ -1,0 +1,88 @@
+/* ═════════════════════════════════════════════════════════════════════
+   TRANSITION / FOUNDERS
+   ═════════════════════════════════════════════════════════════════════ */
+
+.transition {
+  background: linear-gradient(135deg, #16294f 0%, #1f3a6b 100%);
+  color: var(--white);
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.transition::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    url('../FounderIllustrations/Library.jpg') center/cover no-repeat;
+  filter: saturate(0.85) contrast(1.05) brightness(0.72);
+  transform: scale(1.03);
+  pointer-events: none;
+  
+}
+
+.transition-container {
+  max-width: none;
+  width: 100%;
+  margin: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.transition-hero {
+  position: relative;
+  height: min(74vh, 860px);
+  overflow: hidden;
+  background: transparent;
+}
+
+.transition-panel {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  padding: 80px 36px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  z-index: 1;
+}
+
+.transition-label {
+  font-family: var(--serif);
+  font-size: clamp(42px, 4.3vw, 64px);
+  letter-spacing: -0.045em;
+  text-transform: none;
+  color: rgba(255, 255, 255, 0.95);
+  line-height: 0.98;
+  margin: 0;
+  max-width: 820px;
+}
+
+.transition-label em {
+  font-style: italic;
+  color: #e8cf8d;
+}
+
+.transition-copy {
+  max-width: 620px;
+  margin-top: auto;
+}
+
+.transition-copy h2 {
+  margin: 0;
+  font-size: clamp(34px, 4vw, 58px);
+  line-height: 1.04;
+  letter-spacing: -0.03em;
+  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.18);
+}
+
+.transition-copy h2 em {
+  color: #e8cf8d;
+  font-style: italic;
+}
+

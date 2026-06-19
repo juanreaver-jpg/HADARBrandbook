@@ -1,0 +1,299 @@
+/* ═════════════════════════════════════════════════════════════════════
+   RESPONSIVE — refined breakpoints (mid-desktop, tablet, mobile)
+   ═════════════════════════════════════════════════════════════════════ */
+
+
+@media (max-width: 1280px){
+  .hero-content h1 { font-size: clamp(60px, 7.2vw, 96px); }
+  .covenant { padding: 128px var(--pad-page) 132px; }
+  .gallery-header h2 { font-size: clamp(36px, 5vw, 64px); }
+}
+
+
+@media (max-width: 1024px){
+  .hero-inner { padding: 92px var(--pad-page) 88px; }
+  .hero-content h1 { font-size: clamp(54px, 8vw, 80px); max-width: 100%; }
+  .hero-crest { height: clamp(340px, 38vw, 500px); margin-bottom: 28px; }
+  .covenant-container,
+  .day-body {
+    gap: 48px;
+  }
+  .gallery-slide { height: clamp(420px, 56vw, 620px); }
+}
+
+
+@media (max-width: 760px){
+  .hero { min-height: auto; }
+  .hero-inner { padding: 88px var(--pad-page) 72px; min-height: auto; }
+  .hero-content { padding: 18px 20px; }
+  .hero-content h1 {
+    font-size: clamp(54px, 14vw, 80px);
+    max-width: 100%;
+    margin-bottom: 22px;
+  }
+  .hero-content p { font-size: 17px; }
+  .hero-crest { height: clamp(260px, 48vw, 380px); margin-bottom: 22px; }
+
+  .proof-strip { padding: 24px var(--pad-page); letter-spacing: 0.22em; font-size: 10px; }
+
+  .covenant { padding: 88px var(--pad-page) 96px; }
+  .covenant-text h2 { font-size: clamp(32px, 9vw, 48px); }
+
+  .day-section { padding-top: 80px; padding-bottom: 80px; }
+  .day-grid { grid-template-columns: 1fr; gap: 14px; }
+  .day-grid-item { min-height: 220px; }
+  .day-grid-item.large { grid-column: auto; grid-row: auto; }
+  .day-schedule-item { padding: 14px 12px; }
+
+  .gallery { padding-top: 80px; padding-bottom: 80px; }
+  .gallery-slide { height: clamp(340px, 78vw, 520px); }
+  .gallery-nav { width: 38px; height: 38px; }
+
+  .admissions-container { padding: 112px var(--pad-page) 88px; }
+  .admissions-body { font-size: 18px; }
+  .admissions-cta-row { flex-direction: column; align-items: stretch; gap: 12px; }
+  .admissions-cta-row .cta-button { width: 100%; padding: 16px 24px; }
+}
+
+
+@media (max-width: 480px){
+  .hero-content h1 { font-size: clamp(48px, 15vw, 72px); }
+  .hero-content .eyebrow { letter-spacing: 0.28em; font-size: 10px; }
+  .proof-strip { padding: 20px 16px; }
+}
+
+  /* ═════════════════════════════════════════════════════════════════════
+     RESPONSIVE POLISH — phone + tablet pass
+     ═════════════════════════════════════════════════════════════════════ */
+
+  /* Tablet — tighten breathing room and stop awkward image stretching. */
+
+  @media (max-width: 1120px){
+    :root {
+      --pad-page: clamp(28px, 4.4vw, 64px);
+    }
+
+    .hero-inner { padding: 96px var(--pad-page) 88px; min-height: 88vh; }
+    .hero-content {
+      background: linear-gradient(180deg, rgba(15, 22, 34, 0.42) 0%, rgba(15, 22, 34, 0.72) 100%);
+      backdrop-filter: blur(2px);
+      -webkit-backdrop-filter: blur(2px);
+      border-radius: 4px;
+      max-width: min(620px, 100%);
+    }
+
+    /* Covenant: replace the cramped fixed-400px crop with a proper portrait. */
+    .covenant { padding: 112px var(--pad-page) 120px; }
+    .covenant-container { gap: 56px; }
+    .covenant-image {
+      position: static;
+      height: auto;
+      aspect-ratio: 4.8 / 6.35;
+      max-width: 480px;
+      margin: 0 auto;
+      transform: none;
+      box-shadow: 0 0 0 12px rgba(250, 246, 240, 0.96), 0 0 0 13px rgba(26, 20, 19, 0.05), 0 20px 56px rgba(26, 20, 19, 0.10);
+    }
+    .covenant-text {
+      max-width: 640px;
+      margin: 0 auto;
+      padding-left: 0;
+      border-left: 0;
+    }
+
+    /* Day: stack header, drop sticky media. */
+    .day-section { padding: 112px var(--pad-page); }
+    .day-header { flex-direction: column; align-items: flex-start; gap: 18px; margin-bottom: 48px; }
+    .day-header h2 { max-width: 100%; }
+    .day-header-link { text-align: left; margin-top: 0; }
+    .day-media { position: static; top: auto; }
+    .day-grid { grid-template-rows: 220px 220px; }
+    .day-grid-item.large { min-height: 460px; }
+
+    /* Gallery: keep arrows visible but tighter; soften caption. */
+    .gallery { padding: 112px var(--pad-page); }
+    .gallery-header { margin-bottom: 40px; }
+    .gallery-carousel { gap: 10px; }
+    .gallery-nav { width: 42px; height: 42px; font-size: 22px; }
+    .gallery-slide { height: clamp(420px, 60vw, 580px); }
+    .gallery-viewport { box-shadow: 0 0 0 10px rgba(248, 242, 234, 0.88), 0 0 0 11px rgba(26, 20, 19, 0.04), 0 18px 48px rgba(26, 20, 19, 0.10); }
+
+    /* Transition / founders panel: keep label readable, dial down hero height. */
+    .transition-hero { height: min(62vh, 620px); }
+    .transition-panel { padding: 64px 28px; }
+    .transition-label { font-size: clamp(34px, 5.4vw, 56px); max-width: 100%; }
+
+    /* Footer */
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+
+    /* Admissions */
+    .admissions-container { padding: 140px var(--pad-page) 96px; }
+    .admissions-body { font-size: 20px; }
+  }
+
+  /* Phone — reclaim horizontal space, restore hero hierarchy, ensure readable
+     text over every photo backdrop. */
+
+  @media (max-width: 760px){
+    :root {
+      --pad-page: clamp(20px, 5vw, 28px);
+    }
+
+    /* HERO — frame the type so it sits cleanly over the playground photo. */
+    .hero { min-height: auto; }
+    .hero-inner { padding: 72px 16px 56px; min-height: 78vh; align-items: flex-end; }
+    .hero-content {
+      max-width: 100%;
+      margin: 0;
+      padding: 24px 20px 22px;
+      background: linear-gradient(180deg, rgba(15, 22, 34, 0.48) 0%, rgba(15, 22, 34, 0.82) 100%);
+      backdrop-filter: blur(3px);
+      -webkit-backdrop-filter: blur(3px);
+      border-radius: 4px;
+      box-shadow: 0 18px 48px rgba(0, 0, 0, 0.28);
+    }
+    .hero-content::before { left: 10px; top: 18px; bottom: 18px; }
+    .hero-content .eyebrow { padding-left: 12px; margin-bottom: 14px; letter-spacing: 0.26em; font-size: 10px; }
+    .hero-crest { height: clamp(260px, 48vw, 380px); padding-left: 0; margin-bottom: 20px; }
+    .hero-content h1 {
+      padding-left: 12px;
+      max-width: 100%;
+      margin-bottom: 18px;
+      font-size: clamp(52px, 14vw, 76px);
+      line-height: 0.92;
+      text-shadow: 0 2px 22px rgba(15, 22, 34, 0.58), 0 1px 3px rgba(0, 0, 0, 0.25);
+    }
+    .hero-content p {
+      padding-left: 12px;
+      max-width: 100%;
+      margin-bottom: 20px;
+      font-size: 16px;
+      line-height: 1.5;
+      color: rgba(255, 255, 255, 0.96);
+      text-shadow: 0 1px 16px rgba(15, 22, 34, 0.55);
+    }
+    .hero-link { margin-left: 12px; font-size: 10px; }
+
+    /* Proof strip */
+    .proof-strip { padding: 22px 16px; font-size: 10px; letter-spacing: 0.22em; }
+
+    /* Covenant */
+    .covenant { padding: 80px var(--pad-page) 88px; }
+    .covenant-container { gap: 36px; grid-template-columns: 1fr; }
+    .covenant-image {
+      position: static;
+      height: auto;
+      aspect-ratio: 4.8 / 6.35;
+      max-width: 100%;
+      transform: none;
+      animation: none;
+      box-shadow: 0 0 0 8px rgba(250, 246, 240, 0.96), 0 14px 36px rgba(26, 20, 19, 0.14);
+    }
+    .covenant-image::before { left: 16px; top: 14px; font-size: 8px; letter-spacing: 0.3em; }
+    .covenant-text { padding-left: 0; border-left: 0; margin-left: 0; max-width: 100%; }
+    .covenant-text h2 { font-size: clamp(30px, 8.6vw, 44px); margin-bottom: 22px; }
+    .covenant-text p { font-size: 17px; line-height: 1.6; margin-bottom: 20px; max-width: 100%; }
+    .covenant-text .divider { width: 72px; margin: 20px 0; }
+    .covenant-quote { font-size: 16px; max-width: 100%; }
+
+    /* Day section */
+    .day-section { padding: 80px var(--pad-page); }
+    .day-header { margin-bottom: 36px; gap: 12px; }
+    .day-header h2 { font-size: clamp(30px, 8.6vw, 44px); }
+    .day-grid {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto;
+      gap: 12px;
+    }
+    .day-grid-item, .day-grid-item.large {
+      min-height: 220px;
+      grid-row: auto;
+      grid-column: auto;
+    }
+    .day-grid-item.large { min-height: 280px; }
+    .day-schedule-label { margin-bottom: 18px; }
+    .day-schedule-item {
+      grid-template-columns: 70px 1fr;
+      gap: 14px;
+      padding: 14px 12px 14px 14px;
+    }
+    .day-schedule-item::after { display: none; }
+    .day-time, .day-activity { font-size: 13px; }
+
+    /* Transition / founders */
+    .transition-hero { height: min(56vh, 480px); }
+    .transition-panel { padding: 48px 20px; }
+    .transition-label { font-size: clamp(26px, 8vw, 38px); max-width: 100%; }
+    .transition-copy h2 { font-size: clamp(24px, 7vw, 34px); }
+
+    /* Gallery */
+    .gallery { padding: 80px var(--pad-page); }
+    .gallery-header { margin-bottom: 32px; }
+    .gallery-header h2 { font-size: clamp(30px, 8.6vw, 44px); margin-bottom: 18px; }
+    .gallery-header p { font-size: 16px; margin-top: 14px; }
+    .gallery-carousel { grid-template-columns: 1fr; gap: 12px; }
+    .gallery-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 3;
+      width: 38px;
+      height: 38px;
+      font-size: 20px;
+      background: rgba(15, 22, 34, 0.6);
+      border-color: rgba(255, 255, 255, 0.25);
+      color: var(--white);
+    }
+    .gallery-nav:hover { background: rgba(15, 22, 34, 0.78); transform: translateY(-50%) scale(1.04); }
+    .gallery-nav:first-of-type { left: 12px; }
+    .gallery-nav:last-of-type { right: 12px; }
+    .gallery-viewport {
+      position: relative;
+      box-shadow: 0 0 0 6px rgba(248, 242, 234, 0.88), 0 0 0 7px rgba(26, 20, 19, 0.04), 0 12px 32px rgba(26, 20, 19, 0.12);
+    }
+    .gallery-viewport::before { top: 12px; left: 12px; font-size: 8px; letter-spacing: 0.28em; }
+    .gallery-slide { height: clamp(320px, 76vw, 480px); }
+    .gallery-slide::before { inset: 12px; }
+    .gallery-slide::after {
+      background: linear-gradient(180deg, rgba(15, 22, 34, 0) 38%, rgba(15, 22, 34, 0.72) 100%);
+    }
+    .gallery-caption {
+      left: 18px; right: 18px; bottom: 16px;
+      font-size: 15px;
+      line-height: 1.35;
+      text-shadow: 0 2px 14px rgba(0, 0, 0, 0.55);
+    }
+    .gallery-caption span { font-size: 9px; letter-spacing: 0.22em; }
+    .gallery-meta { flex-wrap: wrap; gap: 8px 12px; margin-top: 14px; }
+
+    /* Library */
+
+    /* The 3D book scene: shrink so it fits a phone without horizontal scroll. */
+
+    /* Curriculum */
+
+    /* Admissions */
+    .admissions-container { padding: 96px var(--pad-page) 80px; }
+    .admissions h2 { font-size: clamp(30px, 8.6vw, 44px); margin: 24px 0; }
+    .admissions-body { font-size: 17px; line-height: 1.55; margin-bottom: 36px; }
+    .admissions-cta-row { flex-direction: column; align-items: stretch; gap: 10px; }
+    .admissions-cta-row .cta-button { width: 100%; padding: 15px 22px; }
+
+    /* Footer */
+    .footer-wrap { padding: 0 var(--pad-page) 40px; }
+    .footer-grid { grid-template-columns: 1fr; gap: 32px; margin-bottom: 32px; }
+    .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+  }
+
+  /* Compact phone — handle the 360px-class viewport. */
+
+  @media (max-width: 420px){
+    .hero-content h1 { font-size: clamp(46px, 14.5vw, 64px); }
+    .hero-crest { height: clamp(200px, 60vw, 280px); margin-bottom: 14px; }
+    .covenant-text h2,
+    .day-header h2,
+    .gallery-header h2,
+    .admissions h2 { font-size: clamp(28px, 8.4vw, 38px); }
+    .transition-label { font-size: clamp(24px, 7.6vw, 32px); }
+  }
+  

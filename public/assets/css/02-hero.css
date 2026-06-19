@@ -1,0 +1,255 @@
+/* ═══════════════════════════════════════════════════════════════════
+   HERO / FOOTER LOGO (navbar styles live in the consolidated
+   block further down — see "NAVBAR — single authoritative block")
+   ═══════════════════════════════════════════════════════════════════ */
+
+.hero-logo {
+  height: 300px;
+  margin-bottom: 18px;
+}
+
+.hero-logo img,
+.footer-logo img {
+  display: block;
+  height: 100%;
+  width: auto;
+  filter: brightness(0) invert(1);
+}
+
+.footer-logo {
+  height: 40px;
+  margin-bottom: 24px;
+}
+
+.cta-button {
+  background: var(--crimson);
+  color: var(--white);
+  padding: 10px 22px;
+  border-radius: 999px;
+  font-family: var(--sans);
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  transition: background var(--dur-fast) var(--ease);
+}
+
+.cta-button:hover {
+  background: var(--crimson-dk);
+}
+
+.cta-button.outline {
+  background: transparent;
+  border: 1px solid var(--crimson);
+  color: var(--crimson);
+}
+
+.cta-button.outline:hover {
+  background: var(--crimson);
+  color: var(--white);
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   HERO SECTION
+   ═══════════════════════════════════════════════════════════════════ */
+
+.hero {
+  position: relative;
+  min-height: 96vh;
+  overflow: hidden;
+  background: #0f1622;
+  color: var(--white);
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    url('../GalleryNew/hadar.academy..15.2025.jpg') center/cover no-repeat;
+  filter: saturate(1.02) contrast(1.04) brightness(1.0);
+  transform: scale(1.03);
+  animation: heroDrift 30s ease-in-out infinite alternate;
+}
+
+.hero-video {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 900ms ease 200ms;
+}
+
+.hero-video.is-ready {
+  opacity: 1;
+}
+
+.hero-video iframe,
+.hero-video video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100vw;
+  height: 56.25vw;        /* 16:9 height for full viewport width */
+  min-width: 177.78vh;    /* 16:9 width for full viewport height */
+  min-height: 100vh;
+  transform: translate(-50%, -50%) scale(1.06);
+  border: 0;
+  pointer-events: none;
+  object-fit: cover;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background:
+    radial-gradient(ellipse 70% 60% at 22% 88%, rgba(22, 41, 79, 0.66) 0%, rgba(22, 41, 79, 0.34) 38%, rgba(22, 41, 79, 0) 68%),
+    linear-gradient(180deg, rgba(22, 41, 79, 0.08) 0%, rgba(22, 41, 79, 0.00) 40%, rgba(15, 22, 34, 0.44) 100%);
+  pointer-events: none;
+  animation: heroLight 18s ease-in-out infinite alternate;
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 3;
+  max-width: var(--max-w);
+  margin: 0 auto;
+  min-height: 96vh;
+  padding: 108px var(--pad-page) 104px;
+  display: flex;
+  align-items: flex-end;
+}
+
+.hero-content {
+  position: relative;
+  max-width: min(720px, 100%);
+  padding: clamp(28px, 3.8vw, 46px) clamp(28px, 4vw, 52px) clamp(26px, 3.2vw, 38px);
+  background: linear-gradient(135deg, rgba(15, 22, 34, 0.62) 0%, rgba(22, 41, 79, 0.42) 100%);
+  backdrop-filter: blur(6px) saturate(1.05);
+  -webkit-backdrop-filter: blur(6px) saturate(1.05);
+  border: 1px solid rgba(244, 237, 222, 0.10);
+  border-left: 0;
+  box-shadow: 0 30px 80px -30px rgba(0, 0, 0, 0.55);
+}
+
+.hero-content::before {
+  content: '';
+  position: absolute;
+  left: 14px;
+  top: 14px;
+  bottom: 14px;
+  width: 1px;
+  background: linear-gradient(180deg, rgba(232, 207, 141, 0.78), rgba(232, 207, 141, 0));
+  opacity: 0.92;
+}
+
+.hero-content .eyebrow {
+  color: rgba(244, 237, 222, 0.78);
+  margin-bottom: 20px;
+  padding-left: 14px;
+  letter-spacing: 0.36em;
+}
+
+.hero-content h1 {
+  color: var(--white);
+  margin: 0 0 28px;
+  max-width: 460px;
+  line-height: 0.9;
+  padding-left: 14px;
+  font-size: clamp(72px, 7.6vw, 116px);
+  letter-spacing: -0.045em;
+  text-shadow: 0 2px 28px rgba(15, 22, 34, 0.45), 0 1px 2px rgba(0, 0, 0, 0.18);
+}
+
+.hero-content h1 span {
+  display: block;
+}
+
+.hero-content p {
+  font-family: var(--serif);
+  font-size: 20px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.92);
+  margin-bottom: 28px;
+  max-width: 560px;
+  padding-left: 14px;
+  text-shadow: 0 1px 18px rgba(15, 22, 34, 0.4);
+}
+
+.hero-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: 14px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid rgba(244, 237, 222, 0.38);
+  font-family: var(--sans);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--white);
+}
+
+.hero-link:hover {
+  opacity: 0.82;
+}
+
+@keyframes heroDrift {
+  from { transform: scale(1.03) translate3d(0, 0, 0); }
+  to { transform: scale(1.08) translate3d(-1.2%, -1.2%, 0); }
+}
+
+@keyframes heroLight {
+  from { opacity: 0.76; transform: translate3d(0, 0, 0); }
+  to { opacity: 1; transform: translate3d(0.8%, -0.4%, 0); }
+}
+
+@keyframes crestBreath {
+  from { transform: translateY(0) scale(1); }
+  to { transform: translateY(-2px) scale(1.02); }
+}
+
+@keyframes crestGlow {
+  from { filter: sepia(1) saturate(5.5) hue-rotate(346deg) brightness(0.86) contrast(1.08) drop-shadow(0 0 14px rgba(244, 237, 222, 0.08)); }
+  to { filter: sepia(1) saturate(5.5) hue-rotate(346deg) brightness(0.92) contrast(1.08) drop-shadow(0 0 28px rgba(244, 237, 222, 0.22)); }
+}
+
+.hero-note {
+  margin-top: 20px;
+  padding: 16px 0 0 14px;
+  border-top: 1px solid rgba(244, 237, 222, 0.18);
+  font-family: var(--sans);
+  font-size: 11px;
+  letter-spacing: 0.24em;
+  line-height: 1.8;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.84);
+}
+
+.hero-crest {
+  height: 132px;
+  margin-bottom: 38px;
+  padding-left: 14px;
+  opacity: 0.92;
+}
+
+.hero-crest img {
+  display: block;
+  height: 100%;
+  width: auto;
+  filter: brightness(0) invert(1) drop-shadow(0 0 24px rgba(244, 237, 222, 0.16));
+  animation: crestBreath 7.5s ease-in-out infinite alternate;
+  transform-origin: center;
+}
+
+.blue-accent {
+  color: var(--blue-acc);
+}
+

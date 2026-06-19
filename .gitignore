@@ -1,0 +1,26 @@
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+*.tmp
+*.temp
+
+# Local agent workspace
+.claude/
+
+# Dependency/build caches
+node_modules/
+.dist/
+dist/
+build/
+.cache/
+.vercel
+
+# Visual regression per-run artifacts (baselines live in screenshots/baseline/)
+screenshots/current/
+screenshots/diff/
+
+# Large unserved files — excluded from the static deployment bundle (1GB limit).
+# These are source/staging assets and dev artifacts, not part of the live site.
+attached_assets/
+screenshots/
+.local/

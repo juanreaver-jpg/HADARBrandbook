@@ -1,0 +1,460 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HADAR Academy — Think Like a Founder</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Libre+Bodoni:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="assets/css/00-tokens.css">
+  <link rel="stylesheet" href="assets/css/01-animations.css">
+  <link rel="stylesheet" href="assets/css/02-hero.css">
+  <link rel="stylesheet" href="assets/css/03-covenant.css">
+  <link rel="stylesheet" href="assets/css/04-day.css">
+  <link rel="stylesheet" href="assets/css/05-transition.css">
+  <link rel="stylesheet" href="assets/css/06-gallery.css">
+  <link rel="stylesheet" href="assets/css/07-library.css">
+  <link rel="stylesheet" href="assets/css/08-admissions.css">
+  <link rel="stylesheet" href="assets/css/09-footer.css">
+  <link rel="stylesheet" href="assets/css/10-animations-refinement.css">
+  <link rel="stylesheet" href="assets/css/11-responsive.css">
+  <link rel="stylesheet" href="assets/css/12-elegance-pass.css">
+  <link rel="stylesheet" href="assets/css/13-section-polish.css">
+  <link rel="stylesheet" href="assets/css/14-nav-hero-overlay.css">
+  <link rel="stylesheet" href="assets/css/15-ornate-and-seams.css">
+  <link rel="stylesheet" href="assets/css/16-navbar.css">
+  <link rel="stylesheet" href="assets/css/17-section-finals.css">
+  <link rel="stylesheet" href="assets/css/18-curriculum.css">
+  <link rel="stylesheet" href="assets/css/19-reading-list.css">
+  <link rel="stylesheet" href="assets/css/21-light-footer.css">
+</head>
+<body class="nav-over-hero">
+
+  <!-- ════════════════════════════════════════════════════════════════════
+       NAVIGATION
+       ════════════════════════════════════════════════════════════════════ -->
+
+  <nav>
+    <a class="logo" href="#school" aria-label="Hadar Academy home">
+      <span class="logo-frame"><img src="assets/HADAR_Lockups/hadar-lockup-07.svg" alt="Hadar Academy"></span>
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="#school" data-nav-target="school"><span>The School</span></a>
+      <a href="#founders" data-nav-target="founders"><span>Founders</span></a>
+      <a href="#curriculum" data-nav-target="curriculum"><span>Curriculum</span></a>
+      <a href="#admissions" data-nav-target="admissions"><span>Admissions</span></a>
+      <a href="#visit" data-nav-target="visit"><span>Visit</span></a>
+    </div>
+    <div class="nav-right">
+      <span class="year" aria-label="Hebrew year 5787 anno mundi · Gregorian 2026"><em>5787</em><span class="year-am">AM</span><span class="year-sep" aria-hidden="true">·</span><span class="year-greg">2026</span></span>
+      <button class="cta-button">Schedule a Visit</button>
+      <button class="nav-hamburger" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="navLinks">
+        <span class="nav-hamburger-line"></span>
+        <span class="nav-hamburger-line"></span>
+        <span class="nav-hamburger-line"></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ════════════════════════════════════════════════════════════════════
+       HERO
+       ════════════════════════════════════════════════════════════════════ -->
+
+  <section class="hero" id="school">
+    <div class="hero-video" aria-hidden="true">
+      <video
+        id="hero-video"
+        src="assets/video/hero.mp4"
+        poster="assets/GalleryNew/hadar.academy..15.2025.jpg"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="auto"
+        aria-hidden="true"></video>
+    </div>
+    <script src="assets/js/hero-video.js"></script>
+    <div class="hero-inner">
+      <div class="hero-content reveal">
+        <div class="hero-crest">
+          <img src="assets/HADAR_Lockups/hadar-lockup-08.svg" alt="Hadar Academy crest mark — crest above the HADAR wordmark">
+        </div>
+        <h1><span>Think Like a</span><span>Founder</span></h1>
+        <p>A classical Jewish academy built on Torah, the Western Canon, and the enduring ideals of the founders.</p>
+        <a class="hero-link hero-link--btn" href="#curriculum">Explore our curriculum →</a>
+      </div>
+    </div>
+    <div class="hero-scroll-cue" aria-hidden="true"></div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════════════════════════
+       FROM COVENANT TO CONSTITUTION
+       ════════════════════════════════════════════════════════════════════ -->
+
+  <section class="covenant reveal" id="covenant">
+    <div class="covenant-container">
+      <div class="covenant-image reveal"></div>
+      <div class="covenant-text">
+        <div class="eyebrow">From Covenant to Constitution</div>
+        <h2 class="reveal">What does it mean to <em>Think Like a Founder?</em></h2>
+        <p class="reveal">Hadar begins at the beginning. A frontier academy where promising young Jews can draw from their roots and emerge fully formed. We study right from the primary source so our students can appreciate the great chain of Western achievement that connects Abraham to Socrates to Washington to Ben-Gurion. To learn like a founder, speak like a founder, and think like a founder.</p>
+        <div class="divider"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════════════════════════
+       THREE PILLARS
+       ════════════════════════════════════════════════════════════════════ -->
+
+  <section class="tp-section" id="pillars">
+    <div class="tp-inner">
+      <header class="tp-intro reveal">
+        <div class="eyebrow">The Three Pillars</div>
+        <h2>Our Three <em>Pillars</em></h2>
+      </header>
+      <div class="tp-stack" id="tpStack">
+        <article class="tp-band reveal">
+          <figure class="tp-figure">
+            <img src="assets/Pillars/jewish-menorah.webp" alt="Engraving of a seven-branched menorah — the Jewish pillar at Hadar" loading="lazy">
+          </figure>
+          <div class="tp-body">
+            <span class="tp-numeral" aria-hidden="true">I</span>
+            <span class="tp-tag">Pillar One</span>
+            <h3>Jewish</h3>
+            <blockquote class="tp-quote">"And you shall teach them diligently to your children." — Deuteronomy 6:7</blockquote>
+            <p>Hadar students receive an Orthodox Jewish education rooted in the enduring traditions of our people. Through Hebrew immersion, Torah study, prayer, and song, our students develop linguistic and spiritual fluency. Hadar seeks to root its students in a sense of belonging, to instill a sense of responsibility in passing forward the torch of our faith.</p>
+          </div>
+        </article>
+        <article class="tp-band tp-band--flip reveal">
+          <figure class="tp-figure">
+            <img src="assets/Pillars/classical-column.webp" alt="Engraving of a Corinthian column capital — the Classical pillar at Hadar" loading="lazy">
+          </figure>
+          <div class="tp-body">
+            <span class="tp-numeral" aria-hidden="true">II</span>
+            <span class="tp-tag">Pillar Two</span>
+            <h3>Classical</h3>
+            <blockquote class="tp-quote">"The object of education is to teach us what is worthy of being loved." — Plato</blockquote>
+            <p>Hadar's curriculum is rooted in the greatest works of the Western Canon. Students learn classical languages in order to engage directly with the linguistic foundations of civilization itself. Through Socratic discussion, Hadar educates rather than indoctrinates, encouraging students to think deeply about the ideas that formed the West.</p>
+          </div>
+        </article>
+        <article class="tp-band reveal">
+          <figure class="tp-figure">
+            <img src="assets/Pillars/history-civs.webp" alt="The Liberty Bell — the American pillar at Hadar" loading="lazy">
+          </figure>
+          <div class="tp-body">
+            <span class="tp-numeral" aria-hidden="true">III</span>
+            <span class="tp-tag">Pillar Three</span>
+            <h3>American</h3>
+            <blockquote class="tp-quote">"Liberty cannot be preserved without a general knowledge among the people." — John Adams</blockquote>
+            <p>Hadar reminds its students of America's biblical origins. That Leviticus is inscribed on the Liberty Bell and that our Constitution derives from our Commandments. Students study the intellectual arc that spans from Jerusalem to Athens to Washington, inspiring our students to graduate from the Academy and go on to serve their country.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════════════════════════
+       A DAY AT HADAR
+       ════════════════════════════════════════════════════════════════════ -->
+
+  <section class="day-section" id="day">
+    <div class="day-container">
+      <div class="day-header reveal">
+        <div>
+          <div class="eyebrow">A Day at Hadar</div>
+          <h2>Begin at the <em>Beginning</em></h2>
+        </div>
+        <div class="day-header-link"><a href="#">Visit the campus →</a></div>
+      </div>
+      <div class="day-body reveal">
+        <div class="day-media">
+          <div class="day-stage" aria-label="Sample day image preview">
+            <div class="day-stage-frame">
+              <div class="day-grid-item day-hero" id="dayHeroImage" style="background-image: url('assets/GalleryPics/image1.jpg')"></div>
+              <div class="day-stage-plate" id="dayPlate" aria-live="polite">
+                <span class="day-stage-tick"></span>
+                <span class="day-stage-plate-eyebrow"><span id="dayPlateTime">08:15</span> · Now in session</span>
+                <span class="day-stage-plate-title" id="dayPlateTitle">Morning Prayer &amp; Shacharit</span>
+              </div>
+              <span class="day-stage-corner" aria-hidden="true">Plate Nº I</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="day-agenda">
+          <div class="day-schedule-label">A SAMPLE DAY</div>
+          <div class="day-schedule" id="daySchedule">
+            <div class="day-schedule-item is-active" tabindex="0" data-day-image="assets/GalleryPics/image1.jpg">
+              <div class="day-time">08:15</div>
+              <div class="day-activity">Morning Prayer & Shacharit</div>
+            </div>
+            <div class="day-schedule-item" tabindex="0" data-day-image="assets/GalleryPics/image4.jpg">
+              <div class="day-time">09:00</div>
+              <div class="day-activity">Hebrew Immersion</div>
+            </div>
+            <div class="day-schedule-item" tabindex="0" data-day-image="assets/GalleryPics/image7.jpg">
+              <div class="day-time">10:00</div>
+              <div class="day-activity">English Phonics & Reading</div>
+            </div>
+            <div class="day-schedule-item" tabindex="0" data-day-image="assets/GalleryPics/image14.jpg">
+              <div class="day-time">11:00</div>
+              <div class="day-activity">Mathematics</div>
+            </div>
+            <div class="day-schedule-item" tabindex="0" data-day-image="assets/GalleryPics/image21.jpg">
+              <div class="day-time">12:00</div>
+              <div class="day-activity">Torah Study / Parsha</div>
+            </div>
+            <div class="day-schedule-item" tabindex="0" data-day-image="assets/GalleryPics/image27.jpg">
+              <div class="day-time">13:00</div>
+              <div class="day-activity">Lunch + Outdoor Play</div>
+            </div>
+            <div class="day-schedule-item" tabindex="0" data-day-image="assets/GalleryPics/image35.jpg">
+              <div class="day-time">14:00</div>
+              <div class="day-activity">History & Civics</div>
+            </div>
+            <div class="day-schedule-item" tabindex="0" data-day-image="assets/GalleryPics/image45.jpg">
+              <div class="day-time">15:00</div>
+              <div class="day-activity">Latin</div>
+            </div>
+            <div class="day-schedule-item" tabindex="0" data-day-image="assets/GalleryPics/image1.jpg">
+              <div class="day-time">16:00</div>
+              <div class="day-activity">Literature & Recitation</div>
+            </div>
+            <div class="day-schedule-item" tabindex="0" data-day-image="assets/GalleryPics/image4.jpg">
+              <div class="day-time"></div>
+              <div class="day-activity">Kabbalat Shabbat (Fridays)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════════════════════════
+       TRANSITION / FOUNDERS CANON
+       ════════════════════════════════════════════════════════════════════ -->
+
+  <div class="section-seam" aria-hidden="true">
+    <span class="section-seam-rule"></span>
+    <span class="section-seam-crest"><img src="assets/HADAR_Lockups/hadar-lockup-11.svg" alt=""></span>
+    <span class="section-seam-rule"></span>
+  </div>
+
+  <section class="transition reveal" id="founders">
+    <div class="transition-container reveal">
+      <div class="transition-hero">
+        <div class="transition-panel transition-panel--editorial transition-panel--quote-only">
+          <h2 class="transition-label"><span class="transition-quote-line transition-quote-line--a">Our students don&rsquo;t take shortcuts.</span><span class="transition-quote-line transition-quote-line--b"><em>They sound out each syllable of truth.</em></span></h2>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════════════════════════
+       GALLERY
+       ════════════════════════════════════════════════════════════════════ -->
+
+  <section class="gallery gallery--editorial" id="gallery">
+    <div class="gallery-container">
+      <div class="gallery-header reveal">
+        <div class="eyebrow">Plates from Campus</div>
+        <h2>Life at <em>Hadar</em></h2>
+        <p>Eleven plates from a year on the grounds. Quiet, candid, and carefully framed.</p>
+      </div>
+
+      <div class="gallery-editorial-grid reveal">
+        <aside class="gallery-side">
+          <div class="gallery-side-eyebrow">
+            <span class="gallery-side-tick"></span>
+            <span class="gallery-side-eyebrow-text" id="gallerySideCat">Community</span>
+          </div>
+          <div class="gallery-side-counter" id="galleryCounter">01 / 11</div>
+          <h3 class="gallery-side-title" id="gallerySideTitle">Harmony in learning and song.</h3>
+          <p class="gallery-side-note" id="gallerySideNote">Photographed across a single academic year. Hover the strip below to preview, tap to advance.</p>
+          <div class="gallery-side-controls">
+            <button class="gallery-nav prev" type="button" aria-label="Previous gallery slide">‹</button>
+            <button class="gallery-nav next" type="button" aria-label="Next gallery slide">›</button>
+          </div>
+        </aside>
+
+        <div class="gallery-carousel">
+          <div class="gallery-viewport" id="galleryViewport">
+            <div class="gallery-track" id="galleryTrack"></div>
+          </div>
+          <div class="gallery-meta gallery-meta--inline" aria-hidden="true">
+            <span class="gallery-caption" id="galleryCaption"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="gallery-filmstrip" id="galleryDots" role="tablist" aria-label="Gallery thumbnails"></div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════════════════════════
+       LIBRARY
+       ════════════════════════════════════════════════════════════════════ -->
+
+
+<section class="reading-list" id="library">
+    <div class="rl-container">
+      <header class="rl-header reveal">
+        <div class="eyebrow">As It Was Written</div>
+        <h2>Truth right from the <em>primary source.</em></h2>
+        <p>From Covenant to Constitution — the books our students meet, in the order they meet them.</p>
+      </header>
+
+      <div class="rl-spread reveal">
+        <aside class="rl-rail" aria-label="Reading list">
+          <div class="rl-rail-label"><span>Reading list</span><span class="rl-rail-count" id="rlCount"></span></div>
+          <ol class="rl-list" id="rlList" role="listbox" aria-label="Choose a volume" tabindex="0"></ol>
+        </aside>
+
+        <div class="rl-stage" aria-live="polite">
+          <div class="rl-shelf" aria-hidden="true"></div>
+          <div class="rl-book" id="rlBook" aria-hidden="true">
+            <div class="rl-book-3d">
+              <div class="rl-cover rl-face rl-face--front">
+                <img id="rlCoverImg" class="rl-cover-img" src="" alt="">
+                <div class="rl-cover-sheen"></div>
+                <div class="rl-cover-edge"></div>
+              </div>
+              <div class="rl-face rl-face--back"></div>
+              <div class="rl-face rl-face--spine">
+                <span class="rl-spine-title" id="rlSpineTitle"></span>
+                <span class="rl-spine-num" id="rlSpineNum"></span>
+              </div>
+              <div class="rl-face rl-face--fore"></div>
+              <div class="rl-face rl-face--top"></div>
+              <div class="rl-face rl-face--bottom"></div>
+            </div>
+            <div class="rl-floor"></div>
+          </div>
+
+          <article class="rl-plate" id="rlPlate">
+            <div class="rl-plate-meta">
+              <span class="rl-plate-num" id="rlNum"></span>
+              <span class="rl-plate-sep" aria-hidden="true">·</span>
+              <span class="rl-plate-cat" id="rlCat"></span>
+            </div>
+            <h3 class="rl-plate-title" id="rlTitle"></h3>
+            <p class="rl-plate-sub" id="rlSub"></p>
+            <blockquote class="rl-plate-quote"><p id="rlQuote"></p></blockquote>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cur" id="curriculum">
+      <div class="cur-container">
+        <header class="cur-header reveal">
+          <div>
+            <div class="eyebrow">The Primary Education</div>
+            <h2>A look inside our <em>curriculum</em></h2>
+          </div>
+          <p class="cur-header-note">Seven subjects, taught as one formation. Select a volume to read the dossier.</p>
+        </header>
+        <div class="cur-tablist" role="tablist" aria-label="Curriculum subjects" id="curTablist"></div>
+        <div class="cur-spread reveal">
+          <figure class="cur-plate" id="curPlate">
+            <img class="cur-plate-img" id="curPlateImg" src="" alt="">
+          </figure>
+          <section class="cur-dossier" id="curDossier" role="tabpanel" aria-live="polite" tabindex="0">
+            <div class="cur-kicker">Editorial notes</div>
+            <h3 class="cur-title" id="curTitle"></h3>
+            <blockquote class="cur-quote" id="curQuote"></blockquote>
+            <div class="cur-method">
+              <div class="cur-method-label">Core method</div>
+              <p class="cur-method-text" id="curMethod"></p>
+            </div>
+          </section>
+        </div>
+      </div>
+    </section>
+
+  <!-- ════════════════════════════════════════════════════════════════════
+       PAGE FOOT — admissions CTA + colophon footer share one botanical
+       texture wash. Wrapping them in a single container means the
+       texture tiles once across the combined height (no seam, no
+       per-section squish from inconsistent tile sizing).
+       ════════════════════════════════════════════════════════════════════ -->
+  <div class="page-foot">
+
+  <section class="admissions" id="admissions">
+    <div class="admissions-container reveal" id="visit">
+      <h2><em>Begin at the Beginning</em></h2>
+      <p class="admissions-body">Start with a campus visit and admissions conversation. Austin, Texas · Fall 5787 / 2026</p>
+      <div class="admissions-cta-row">
+        <button class="cta-button cta-button--primary">Schedule a Visit</button>
+        <button class="cta-button outline cta-button--ghost">Apply for 5787</button>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer-colophon">
+    <div class="footer-wrap">
+      <div class="colophon-mark" aria-hidden="true">
+        <span class="colophon-rule"></span>
+        <a class="logo footer-logo colophon-crest" href="#school" aria-label="Hadar Academy home">
+          <img src="assets/HADAR_Lockups/hadar-lockup-11.svg" alt="Hadar Academy">
+        </a>
+        <span class="colophon-rule"></span>
+      </div>
+
+      <div class="colophon-body">
+        <p class="colophon-tagline"><em>An Education for the Soul</em></p>
+        <p class="colophon-subhead">Contact admissions to schedule your campus tour.</p>
+      </div>
+
+      <div class="colophon-columns">
+        <div class="colophon-column">
+          <h4 class="colophon-column-label">The School</h4>
+          <ul>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Faculty</a></li>
+            <li><a href="#">Calendar</a></li>
+            <li><a href="#">Head's Letter</a></li>
+          </ul>
+        </div>
+        <div class="colophon-column">
+          <h4 class="colophon-column-label">Curriculum</h4>
+          <ul>
+            <li><a href="#">Hebrew</a></li>
+            <li><a href="#">Latin</a></li>
+            <li><a href="#">Soulcraft</a></li>
+            <li><a href="#">Primary Sources</a></li>
+          </ul>
+        </div>
+        <div class="colophon-column">
+          <h4 class="colophon-column-label">Admissions</h4>
+          <ul>
+            <li><a href="#">Apply</a></li>
+            <li><a href="#">Tuition</a></li>
+            <li><a href="#">Visit</a></li>
+            <li><a href="#">FAQ</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="colophon-established">Established 5787 / 2026 in Austin, Texas.</p>
+
+      <div class="footer-bottom">
+        <span>© 5787 Hadar Academy · Austin, TX</span>
+      </div>
+    </div>
+  </footer>
+
+  </div><!-- /.page-foot -->
+
+  <!-- ════════════════════════════════════════════════════════════════════
+       JAVASCRIPT
+       ════════════════════════════════════════════════════════════════════ -->
+
+  <script src="assets/js/site.js"></script>
+
+</body>
+</html>

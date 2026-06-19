@@ -1,0 +1,6 @@
+hadar-real-photos.zip filter=lfs diff=lfs merge=lfs -text
+attached_assets/Processed_Gemini_Web_v3_1779719004788.zip filter=lfs diff=lfs merge=lfs -text
+attached_assets/hadar-real-photos_1780019624814.zip filter=lfs diff=lfs merge=lfs -text
+attached_assets/School_Materials_1780066642453.zip filter=lfs diff=lfs merge=lfs -text
+assets/downloads/hadar-school-materials.zip filter=lfs diff=lfs merge=lfs -text
+public/assets/downloads/hadar-school-materials.zip filter=lfs diff=lfs merge=lfs -text

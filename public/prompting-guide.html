@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Image Prompting Guide · HADAR Brand Book</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com/">
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Bodoni:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --serif: 'Libre Bodoni', Georgia, serif;
+      --sans: 'Inter', system-ui, sans-serif;
+      --vellum: #F4EBD8;
+      --parchment: #EFF4CE;
+      --parchment-true: #EFE8D4;
+      --haggadah: #8C1C2B;
+      --lapis: #1F3A6E;
+      --lapis-deep: #16294F;
+      --gold: #B8842A;
+      --green: #2D5A3D;
+      --umber: #5C3D2E;
+      --ink: #3D2914;
+      --ink-soft: #2a1d0e;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--vellum);
+      color: var(--ink);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    .serif { font-family: var(--serif); }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
+
+    /* ─────────── TOP BAR ─────────── */
+    .topbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 44px;
+      background: var(--lapis-deep);
+      color: var(--vellum);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 32px;
+      z-index: 100;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      border-bottom: 1px solid rgba(244, 235, 216, 0.15);
+    }
+    .topbar .brand { font-weight: 600; }
+    .topbar .meta { opacity: 0.65; }
+
+    /* ─────────── BACK LINK ─────────── */
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--ink);
+      text-decoration: none;
+      font-size: 13px;
+      margin-bottom: 32px;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+    .back-link:hover { color: var(--haggadah); }
+    .back-link::before {
+      content: "←";
+      font-size: 18px;
+    }
+
+    /* ─────────── MAIN CONTENT ─────────── */
+    .content {
+      margin-top: 44px;
+      padding: 64px 32px;
+    }
+
+    .section-label {
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      margin-bottom: 24px;
+    }
+
+    h1 {
+      font-family: var(--serif);
+      font-size: 52px;
+      line-height: 1.2;
+      margin-bottom: 24px;
+      color: var(--ink);
+      font-weight: 400;
+    }
+
+    h2 {
+      font-family: var(--serif);
+      font-size: 36px;
+      line-height: 1.2;
+      margin: 48px 0 24px;
+      color: var(--ink);
+      font-weight: 400;
+    }
+
+    h3 {
+      font-family: var(--serif);
+      font-size: 24px;
+      line-height: 1.3;
+      margin: 32px 0 16px;
+      color: var(--ink);
+      font-weight: 500;
+    }
+
+    p {
+      margin-bottom: 16px;
+      max-width: 720px;
+      line-height: 1.7;
+    }
+
+    .lede {
+      font-size: 18px;
+      line-height: 1.8;
+      color: var(--ink);
+      max-width: 720px;
+      margin-bottom: 32px;
+    }
+
+    em { font-style: italic; }
+
+    /* ─────────── FEATURE IMAGE ─────────── */
+    .feature-image {
+      width: 100%;
+      max-width: 900px;
+      height: auto;
+      margin: 48px 0;
+      border: 1px solid rgba(61, 41, 20, 0.1);
+      padding: 12px;
+      background: white;
+    }
+
+    .image-caption {
+      font-size: 12px;
+      color: var(--ink-soft);
+      margin-top: 12px;
+      letter-spacing: 0.05em;
+    }
+
+    /* ─────────── CODE BLOCKS ─────────── */
+    pre {
+      background: rgba(61, 41, 20, 0.05);
+      padding: 16px;
+      margin: 24px 0;
+      overflow-x: auto;
+      border-left: 3px solid var(--gold);
+      font-size: 13px;
+      line-height: 1.6;
+      font-family: var(--sans);
+    }
+
+    code {
+      font-family: var(--sans);
+      font-size: 13px;
+    }
+
+    /* ─────────── LISTS ─────────── */
+    ul, ol {
+      margin-left: 24px;
+      margin-bottom: 24px;
+    }
+
+    li {
+      margin-bottom: 12px;
+      line-height: 1.7;
+    }
+
+    /* ─────────── FOOTER ─────────── */
+    .footer {
+      margin-top: 96px;
+      padding: 48px 32px;
+      border-top: 1px solid rgba(61, 41, 20, 0.1);
+      text-align: center;
+      font-size: 12px;
+      color: var(--ink-soft);
+      letter-spacing: 0.05em;
+    }
+
+    .footer a {
+      color: var(--haggadah);
+      text-decoration: none;
+    }
+
+    .footer a:hover { text-decoration: underline; }
+
+    /* ─────────── RESPONSIVE ─────────── */
+    @media (max-width: 768px) {
+      h1 { font-size: 32px; }
+      h2 { font-size: 24px; }
+      .content { padding: 48px 24px; }
+      .container { padding: 0 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand">HADAR — Brand Book</div>
+  <div class="meta">Prompting Guide · 10.4</div>
+</div>
+
+<div class="content">
+  <div class="container">
+    <a href="index.html#art-direction" class="back-link">Back to Art Direction</a>
+
+    <div class="section-label">— 10.4 / AI Image Prompting Guide</div>
+    <h1><em>Nano Banana 2</em><br>Prompting System.</h1>
+
+    <p class="lede">This guide translates Hadar's chromolithograph art direction into executable prompts for Nano Banana 2, the AI image model used to produce the brand's illustrated assets. It is written for designers and creative partners who need to generate new images that stay inside the visual system without drifting into generic AI output.</p>
+
+    <img src="./assets/NanoBanana Generation.png" alt="Nano Banana 2 model interface and generated image" class="feature-image">
+    <p class="image-caption">Fig. 01 · Nano Banana 2 Interface · AI image generation for chromolithograph-style output</p>
+
+    <h2>The Core Problem</h2>
+    <p>Nano Banana 2 — like all current image models — has a dominant training bias toward painterly realism. Left unprompted, it renders children as cartoon or cel-shaded figures and historical scenes as oil paintings in the manner of Norman Rockwell or Thomas Kinkade. Neither is Hadar.</p>
+    <p>The entire prompting system exists to fight this bias. Every prompt leads with the physical print process rather than the subject. The model must be told what kind of ink it is working with before it is told what to draw.</p>
+
+    <h2>The Canonical Style Block</h2>
+    <p>This block leads every prompt without exception. It is non-negotiable. Do not abbreviate it. Do not move it to the end of the prompt. The model front-weights its attention — what appears first governs the rendering register of everything that follows.</p>
+
+    <h3>Master Style Prefix</h3>
+    <pre><code>19th century tinted lithograph, Winslow Homer wood engraving style, Harper's Weekly illustration, engraving linework subtle color wash, muted desaturated tones, cream paper ground, line-dominant rendering</code></pre>
+
+    <h3>Master Negative Prompt</h3>
+    <pre><code>cartoon, cel shading, anime, children's book illustration, smooth skin, rounded cartoon features, flat color, painterly, oil painting, gouache, smooth gradients, soft shading, photorealistic, 3D, rendered, text, typography, labels, somber, Norman Rockwell, highly saturated color, chromolithograph heavy color, dark mood, horror</code></pre>
+
+    <h2>Why These Anchors Matter</h2>
+
+    <h3>Winslow Homer for Students</h3>
+    <p>Homer's Harper's Weekly engravings depict real children in a non-cartoon register — boys working, studying, playing in outdoor and domestic settings. His line is precise, his figures have weight and physical presence, and his compositions carry narrative force without sentiment. He is the correct stylistic anchor for student figures in Hadar's visual system.</p>
+
+    <h3>Why Not Gustave Doré for Students</h3>
+    <p>Doré works for epic historical scenes — Moses, Washington, Abraham — because his figures are monumental and his environments are dramatic. He does not work for student figures. Nano Banana 2 associates Doré with painterly illustrated-book aesthetics that pull child figures toward cartoon. Rule: use Homer for students, Doré only for lone historical figures in sweeping compositions.</p>
+
+    <h3>Why Not "Chromolithograph" as the Primary Term</h3>
+    <p>"Chromolithograph" tells the model about color and era but not about line quality. Nano Banana 2 interprets chromolithograph as permission to go full painterly and saturated. The correct anchor is the physical process — engraving linework, tinted color wash, line-dominant rendering — which constrains the model to build volume from hatching rather than from soft gradients.</p>
+
+    <h2>Three Image Categories</h2>
+    <p>Hadar's visual system runs on three image types. Each has its own prompt logic. The rules for one category do not transfer to another.</p>
+
+    <h3>Category A — Photographs of Students</h3>
+    <p>Real school photography. Not AI-generated. These are the proof that Hadar exists now. They are warm, candid, and documentary. Natural light. Faces in concentration, not performance. Hands on real physical books.</p>
+
+    <h3>Category B — Epic Historical Illustrations</h3>
+    <p>Lone historical figures in sweeping, full-scene compositions. No students. No modern elements. The historical figure carries the entire frame. These set the moral and cultural backdrop for the brand and are used as full-bleed scroll modules on the website.</p>
+
+    <strong>Base prompt structure:</strong>
+    <pre><code>[STYLE PREFIX], wide epic scene, [FIGURE DESCRIPTION including key identifying physical features], [ACTION AND GESTURE — specific, not vague], [ENVIRONMENT described in specific hatching language], [COLOR WASH assigned to specific elements, not globally], no students, no modern elements, no text, no framing device, lithograph linework throughout</code></pre>
+
+    <h3>Category C — Mentorship Illustrations</h3>
+    <p>A modern Hadar student in the same frame as a historical figure. The student is in full color, fully rendered. The historical figure is rendered down — in shadow silhouette, pale open hatching, or halftone wash. The hand-off across centuries made visible.</p>
+
+    <strong>This is the most technically complex category and the most likely to fail.</strong>
+
+    <pre><code>[STYLE PREFIX], isolated figure study, no background no setting no framing device, small [youth / young girl] in white collared shirt navy trousers [small skullcap on head / hair neatly tied back] [POSE AND EXPRESSION], figure rendered as 19th century engraving specimen crosshatch builds all volume no smooth skin no rounded cartoon features no cel shading, large [HISTORICAL FIGURE DESCRIPTION AND KEY IDENTIFYING FEATURES] rendered [as a cast shadow on cream ground / as a ghostly pale presence in light open hatching barely materialized], shadow dramatically larger than the student [KEY SILHOUETTE ELEMENTS clearly readable], shadow does not match the student's pose, wide open cream ground, no painterly shading no smooth gradients no text</code></pre>
+
+    <h2>Production Workflow</h2>
+    <ol>
+      <li><strong>Generate the historical figure shadow or ghost separately.</strong> Cream ground, no student present. Focus the generation entirely on getting the silhouette shape correct.</li>
+      <li><strong>Generate the student figure separately.</strong> Cream ground, no historical figure present. Focus on getting the engraving register correct. Reject any generation that shows smooth skin, cartoon features, or flat color.</li>
+      <li><strong>Composite in Photoshop.</strong> Scale the historical figure to approximately 70% of frame height. Scale the student to approximately 30%. Position the student in the lower left or lower center. Place the historical figure behind and above.</li>
+      <li><strong>Apply color to the student figure as a separate layer.</strong> Clip a Solid Color adjustment layer to the student figure using the selection. Set blend mode to Multiply or Overlay. Use the brand's warm color register — ochre, ruby, amber — at 30–50% opacity.</li>
+      <li><strong>Apply a cool sepia tone to the shadow or historical figure.</strong> This reinforces the two-register contrast between warm present and cool past.</li>
+      <li><strong>Add a paper grain overlay at 8–12% opacity</strong> across the entire composition. Use a scanned paper grain rather than a Photoshop noise filter.</li>
+    </ol>
+
+    <h2>Key Constraints</h2>
+
+    <p><strong>For Student Figures:</strong> Never write "7 year old boy" or include any specific age number. Age numbers trigger children's book illustration mode in Nano Banana 2 and cannot be overridden by style tokens. Use "small youth" or "young girl." The uniform and the scale of the figure relative to other elements in the composition will communicate age.</p>
+
+    <p><strong>For Color in Prompts:</strong> Color is never described globally. It is always assigned to specific elements. This prevents the model from applying uniform saturation across the image, which destroys the two-register contrast that defines the system.</p>
+
+    <h3>Approved Color Palette</h3>
+    <ul>
+      <li><strong>Vellum ground</strong> — the cream paper surface that all isolated objects and figures float on</li>
+      <li><strong>Warm ochre</strong> — stone surfaces, parchment, limestone, sandy ground</li>
+      <li><strong>Warm crimson / ruby</strong> — robes, key compositional accents</li>
+      <li><strong>Muted teal / lapis</strong> — water, sky, architectural shadow</li>
+      <li><strong>Warm amber / antique gold</strong> — brass surfaces, crowns, metal objects</li>
+      <li><strong>Manuscript green</strong> — foliage, secondary robes</li>
+      <li><strong>Cool sepia / umber</strong> — shadow tones, halftone wash on historical figures</li>
+    </ul>
+
+    <p><strong>Wrong:</strong> "highly saturated jewel tones throughout"</p>
+    <p><strong>Correct:</strong> "warm crimson wash on robes, muted teal on water walls, cool grey on shadow sides"</p>
+
+    <div class="footer">
+      <p>Hadar Academy · Brand Book · Art Direction Supplement · Will × Hadar · MMXXVI · v1.0</p>
+      <p><a href="index.html#art-direction">← Back to Art Direction</a></p>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>

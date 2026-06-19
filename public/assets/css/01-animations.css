@@ -1,0 +1,299 @@
+/* ═════════════════════════════════════════════════════════════════════
+   PREMIUM ANIMATIONS & REVEAL SYSTEM
+   ═════════════════════════════════════════════════════════════════════ */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 800ms var(--ease),
+              transform 800ms var(--ease);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger animation for child elements */
+.stagger > * {
+  transition-delay: calc(var(--i, 0) * 0.15s);
+}
+
+/* Premium text motion */
+.text-motion {
+  --premium-stagger: 42ms;
+  --premium-rise: 1.05em;
+}
+
+.text-motion .premium-word {
+  display: inline-block;
+  white-space: pre;
+  opacity: 0;
+  transform-origin: 50% 100%;
+  transform: translateY(var(--premium-rise)) scale(0.985) scaleY(0.8);
+  will-change: transform, opacity;
+  transition:
+    opacity 700ms cubic-bezier(0.22, 0.61, 0.36, 1),
+    transform 920ms cubic-bezier(0.22, 0.61, 0.36, 1);
+  transition-delay: calc(var(--premium-order, 0) * var(--premium-stagger));
+}
+
+.reveal.visible .text-motion .premium-word,
+.text-motion.is-live .premium-word {
+  opacity: 1;
+  transform: translateY(0) scale(1) scaleY(1);
+  text-shadow: 0 0 18px rgba(140, 28, 43, 0.06);
+}
+
+.text-motion.text-motion--eyebrow {
+  --premium-stagger: 22ms;
+  --premium-rise: 0.48em;
+  letter-spacing: inherit;
+}
+
+.text-motion.text-motion--hero {
+  --premium-stagger: 60ms;
+}
+
+.text-motion.text-motion--tight {
+  --premium-stagger: 32ms;
+}
+
+/* Hero section animations */
+.hero-left.reveal {
+  animation: slideUpHero 0.9s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+  opacity: 0;
+}
+
+.hero-right.reveal {
+  animation: maskRevealRight 1.2s cubic-bezier(0.22, 0.61, 0.36, 1) 0.2s forwards;
+  opacity: 0;
+}
+
+@keyframes slideUpHero {
+  from {
+    opacity: 0;
+    transform: translateY(48px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes maskRevealRight {
+  from {
+    opacity: 0;
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    opacity: 1;
+    clip-path: inset(0 0% 0 0);
+  }
+}
+
+/* Proof strip entrance */
+.proof-strip.reveal {
+  animation: slideDown 0.7s cubic-bezier(0.22, 0.61, 0.36, 1) 0.5s both;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Section card stagger */
+.pillar-card.reveal,    .gallery-item.reveal,
+.book-card.reveal {
+  animation: fadeUpStagger 0.7s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+@keyframes fadeUpStagger {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Library books smooth fade-in to match floating */
+
+@keyframes bookReveal {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Smooth book switching */
+
+@keyframes contentFade {
+  to { opacity: 0.4; }
+}
+
+@keyframes contentReveal {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Image reveals with subtle scale */
+.covenant-image.reveal {
+  animation: scaleReveal 1.0s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+.day-grid-item.reveal {
+  animation: dayImageFadeIn 0.9s ease both;
+}
+
+@keyframes scaleReveal {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Heading animations */
+h1.reveal,
+h2.reveal {
+  animation: headingReveal 0.9s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+@keyframes headingReveal {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+    letter-spacing: 0.02em;
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    letter-spacing: 0;
+  }
+}
+
+/* Figure card entrance with stagger */
+.figure-card {
+  animation: figureReveal 0.6s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+.transition.reveal .figure-card:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.transition.reveal .figure-card:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.transition.reveal .figure-card:nth-child(3) {
+  animation-delay: 0.2s;
+}
+
+.transition.reveal .figure-card:nth-child(4) {
+  animation-delay: 0.25s;
+}
+
+.transition.reveal .figure-card:nth-child(5) {
+  animation-delay: 0.3s;
+}
+
+.transition.reveal .figure-card:nth-child(n+6) {
+  animation-delay: calc(0.1s + (var(--n, 0) * 0.05s));
+}
+
+@keyframes figureReveal {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Button hover refinement */
+.cta-button {
+  transition: all var(--dur-base) var(--ease);
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-button::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.1);
+  opacity: 0;
+  transition: opacity var(--dur-base) var(--ease);
+  z-index: 0;
+}
+
+.cta-button:hover::before {
+  opacity: 1;
+}
+
+.cta-button:active {
+  transform: scale(0.98);
+}
+
+/* Keyboard focus styles */
+
+.cta-button:focus-visible,
+.day-schedule-item:focus-visible {
+  outline: 3px solid var(--crimson);
+  outline-offset: 2px;
+}
+/* (.gallery-dot / .gallery-nav focus-visible outline and .gallery-item
+   premium hover moved to 'GALLERY -- single authoritative block'
+   further down in this file.) */
+
+/* Book card 3D hover */
+.book-card {
+  transition: transform 450ms var(--ease), box-shadow 450ms var(--ease), border-color 450ms var(--ease);
+}
+
+.book-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 16px 38px rgba(26, 20, 19, 0.16);
+  border-color: rgba(140, 28, 43, 0.22);
+}
+
+/* Link hover underline animation */
+.day-header-link a::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--crimson);
+  transition: width var(--dur-base) var(--ease);
+}
+
+.day-header-link a:hover::after {
+  width: 100%;
+}
+

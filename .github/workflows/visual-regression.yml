@@ -1,0 +1,71 @@
+name: Visual regression
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  vrt:
+    name: Pixel-diff MainWebsiteMockup.html against baselines
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install npm dependencies
+        run: npm ci || npm install
+
+      - name: Install Playwright Chromium (with system deps)
+        run: npx playwright install --with-deps chromium
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Start static server
+        run: |
+          python3 -m http.server 5000 >/tmp/http-server.log 2>&1 &
+          echo $! > /tmp/http-server.pid
+          # Wait for the server to actually answer before running the check.
+          for i in $(seq 1 30); do
+            if curl -sfI http://localhost:5000/MainWebsiteMockup.html >/dev/null; then
+              echo "static server is up"
+              exit 0
+            fi
+            sleep 1
+          done
+          echo "static server failed to start" >&2
+          cat /tmp/http-server.log >&2
+          exit 1
+
+      - name: Run visual regression check
+        run: npm run vrt
+
+      - name: Stop static server
+        if: always()
+        run: |
+          if [ -f /tmp/http-server.pid ]; then
+            kill "$(cat /tmp/http-server.pid)" 2>/dev/null || true
+          fi
+
+      - name: Upload diff + current screenshots on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: vrt-diffs
+          path: |
+            screenshots/current/
+            screenshots/diff/
+          if-no-files-found: ignore
+          retention-days: 14

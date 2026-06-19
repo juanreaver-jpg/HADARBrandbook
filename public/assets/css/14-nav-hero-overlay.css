@@ -1,0 +1,558 @@
+/* ═══════════════════════════════════════════════════════════════════
+   NAV + HERO OVERLAY rework.
+
+   1) Nav: when over hero, the nav is fully transparent â NO dark
+      gradient strip behind it. Just text + logo with a soft drop
+      shadow for legibility. When past hero, snaps to solid white.
+   2) Hero overlay: a single, uniform darkening across the entire
+      video frame instead of a patchy left-bottom vignette.
+   =================================================================== */
+
+
+/* ─── HERO OVERLAY ───────────────────────────────────────────────
+   Replace the patchy radial+linear gradients with a single uniform
+   wash across the ENTIRE video frame. Combines a flat darkening
+   for mood + a slight bottom emphasis so the content card reads.
+   The bottom dark-fade seam (hero::after at line 7681) is kept for
+   the Hero â Covenant transition. */
+.hero::after {
+  animation: none;
+}
+/* Override the original hero::after (z-index:2, inset:0) gradient.
+   Selectors here are more specific via `body .hero::after`. */
+body .hero > :not(.hero-inner):not(.hero-video):not(.hero-scroll-cue) {}
+/* Use a fresh layer for the video-frame wash. Place it via the
+   existing .hero element using a separate ::before-equivalent.
+   We can't add a 2nd pseudo-element on .hero (only one ::before /
+   ::after each, both already used), so instead we adjust the
+   existing inset:0 ::after to be a uniform overlay across the
+   full frame, and keep the bottom-seam fade from the later
+   hero::after override (positioned at bottom: 0, height: 12vh). */
+
+/* The original `.hero::after { inset: 0 }` near line 595 paints a
+   full-frame layer â we re-skin it here with a uniform wash. The
+   later `.hero::after { bottom: 0, height: 12vh }` override at
+   line 7681 wins for the seam fade, so we need to re-assert the
+   full-frame wash here with a different mechanism: use a stronger
+   selector that targets the full-frame layer specifically. */
+section.hero::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0;
+  top: 0;
+  bottom: 0;
+  height: auto;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background:
+    /* Strong bottom seam fade to covenant brown — last 18vh of the
+       hero ramps from transparent to the covenant's dark brown so the
+       two sections meld instead of butting. */
+    linear-gradient(
+      180deg,
+      rgba(20, 12, 8, 0)    0%,
+      rgba(20, 12, 8, 0)    78%,
+      rgba(20, 12, 8, 0.45) 90%,
+      rgba(20, 12, 8, 0.92) 100%
+    ),
+    /* Soft bottom emphasis under the content card */
+    linear-gradient(
+      180deg,
+      rgba(15, 10, 6, 0.18) 0%,
+      rgba(15, 10, 6, 0.10) 35%,
+      rgba(15, 10, 6, 0.28) 70%,
+      rgba(15, 10, 6, 0.45) 100%
+    ),
+    /* Uniform dark wash across the whole frame for cinematic mood */
+    rgba(15, 10, 6, 0.22);
+  animation: none;
+}
+
+/* ===================================================================
+   HERO -- single authoritative block
+   -------------------------------------------------------------------
+   Every hero override (CTA button, scroll cue, crest treatment,
+   calmed ambient motion, full-bleed cinematic recomposition, the
+   hero -> covenant seam fade, and the uniform overlay wash) lives
+   in this single block. The base .hero / .hero-* definitions still
+   live near line 484 ('HERO SECTION'); this block is the final
+   cascade layer that lands on top of them. Earlier draft / polish-
+   pass blocks were lifted out and replaced with one-line
+   breadcrumb comments pointing back here.
+   =================================================================== */
+
+/* (from original location, lines 2344-2416.) */
+
+/* C. HERO COMPOSITION */
+.hero-link--btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: 14px;
+  margin-top: 8px;
+  padding: 14px 28px 14px 26px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--crimson);
+  color: var(--white);
+  font-family: var(--sans);
+  font-size: 12px;
+  letter-spacing: 0.20em;
+  text-transform: uppercase;
+  font-weight: 500;
+  box-shadow: 0 12px 32px -10px rgba(140, 28, 43, 0.6),
+              0 0 0 1px rgba(244, 237, 222, 0.10) inset;
+  transition: background 240ms ease, transform 240ms ease,
+              box-shadow 240ms ease;
+}
+.hero-link--btn:hover {
+  background: var(--crimson-dk);
+  transform: translateY(-1px);
+  box-shadow: 0 18px 40px -12px rgba(140, 28, 43, 0.7),
+              0 0 0 1px rgba(244, 237, 222, 0.14) inset;
+  opacity: 1;
+}
+
+.hero-scroll-cue {
+  position: absolute;
+  left: 50%;
+  bottom: 28px;
+  transform: translateX(-50%);
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  pointer-events: none;
+  opacity: 0.78;
+}
+.hero-scroll-cue::before {
+  content: 'SCROLL';
+  font-family: var(--sans);
+  font-size: 9px;
+  letter-spacing: 0.36em;
+  color: rgba(244, 237, 222, 0.78);
+  text-transform: uppercase;
+}
+.hero-scroll-cue::after {
+  content: '';
+  width: 1px;
+  height: 42px;
+  background: linear-gradient(180deg,
+    rgba(244, 237, 222, 0.78) 0%,
+    rgba(244, 237, 222, 0.78) 30%,
+    rgba(244, 237, 222, 0) 100%);
+  animation: heroScrollPulse 2.4s ease-in-out infinite;
+  transform-origin: top center;
+}
+@keyframes heroScrollPulse {
+  0%   { transform: scaleY(0.35); opacity: 0.4; }
+  50%  { transform: scaleY(1);    opacity: 1; }
+  100% { transform: scaleY(0.35); opacity: 0.4; }
+}
+
+@media (max-width: 760px){
+  .hero-scroll-cue { bottom: 18px; }
+  .hero-scroll-cue::after { height: 28px; }
+}
+
+/* (from original location, lines 2535-2564.) */
+/* — HERO CREST: more vertical space, refined entrance, calmer breath. — */
+.hero-crest {
+  height: clamp(440px, 62vh, 760px);
+  margin-bottom: clamp(8px, 1.4vh, 20px);
+  padding-left: 0;
+  opacity: 0;
+  transform: translateY(8px) scale(0.985);
+  transition: opacity 1600ms cubic-bezier(0.22, 0.61, 0.36, 1) 220ms,
+              transform 1800ms cubic-bezier(0.22, 0.61, 0.36, 1) 220ms;
+  position: relative;
+  isolation: isolate;
+}
+.hero-crest::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: -8% -22% -10% -22%;
+  background:
+    radial-gradient(ellipse 58% 62% at 50% 50%,
+      rgba(8, 14, 26, 0.78) 0%,
+      rgba(8, 14, 26, 0.58) 32%,
+      rgba(8, 14, 26, 0.28) 58%,
+      rgba(8, 14, 26, 0) 82%);
+  pointer-events: none;
+  filter: blur(2px);
+}
+.hero-content.reveal.visible .hero-crest,
+body.hero-crest-ready .hero-crest {
+  opacity: 0.96;
+  transform: translateY(0) scale(1);
+}
+.hero-crest img {
+  filter:
+    brightness(0) invert(1)
+    drop-shadow(0 2px 18px rgba(0, 0, 0, 0.65))
+    drop-shadow(0 0 36px rgba(0, 0, 0, 0.45))
+    drop-shadow(0 0 28px rgba(244, 237, 222, 0.16));
+  animation: crestRadiance 11s ease-in-out infinite alternate;
+  transform-origin: center;
+  transition: filter 1200ms ease;
+}
+@keyframes crestBreath {
+  from { transform: translateY(0) scale(1); }
+  to   { transform: translateY(-1px) scale(1.008); }
+}
+@keyframes crestRadiance {
+  0% {
+    filter:
+      brightness(0) invert(1)
+      drop-shadow(0 2px 18px rgba(0, 0, 0, 0.62))
+      drop-shadow(0 0 32px rgba(0, 0, 0, 0.42))
+      drop-shadow(0 0 22px rgba(244, 237, 222, 0.12));
+  }
+  50% {
+    filter:
+      brightness(0) invert(1)
+      drop-shadow(0 2px 18px rgba(0, 0, 0, 0.68))
+      drop-shadow(0 0 40px rgba(0, 0, 0, 0.50))
+      drop-shadow(0 0 34px rgba(244, 237, 222, 0.22));
+  }
+  100% {
+    filter:
+      brightness(0) invert(1)
+      drop-shadow(0 2px 18px rgba(0, 0, 0, 0.62))
+      drop-shadow(0 0 32px rgba(0, 0, 0, 0.42))
+      drop-shadow(0 0 22px rgba(244, 237, 222, 0.12));
+  }
+}
+
+/* (from original location, lines 2609-2619.) */
+/* — CALMED AMBIENT MOTION — */
+.hero::before {
+  animation: heroDrift 56s ease-in-out infinite alternate;
+}
+@keyframes heroDrift {
+  from { transform: scale(1.03) translate3d(0, 0, 0); }
+  to   { transform: scale(1.05) translate3d(-0.6%, -0.7%, 0); }
+}
+.hero::after {
+  animation: none;
+}
+
+/* (from original location, lines 3023-3140.) */
+/* ─────────────────────────────────────────────────────────────────────
+   HERO: full-bleed cinematic recomposition
+   Kill the glass panel. Center the headline directly on the video with a
+   soft scrim. CTA anchored near the bottom above the scroll cue.
+   ───────────────────────────────────────────────────────────────────── */
+.hero::after {
+  background:
+    radial-gradient(ellipse 62% 52% at 50% 46%,
+      rgba(0, 0, 0, 0.46) 0%,
+      rgba(0, 0, 0, 0.22) 48%,
+      rgba(0, 0, 0, 0) 78%),
+    linear-gradient(180deg,
+      rgba(15, 22, 34, 0.50) 0%,
+      rgba(15, 22, 34, 0.08) 22%,
+      rgba(15, 22, 34, 0.18) 58%,
+      rgba(15, 22, 34, 0.82) 100%);
+}
+.hero-inner {
+  align-items: stretch;
+  justify-content: center;
+  text-align: center;
+  padding: 72px var(--pad-page) 60px;
+}
+.hero-content {
+  position: static;
+  max-width: min(1100px, 100%);
+  padding: 0;
+  background: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border: 0;
+  box-shadow: none;
+  text-align: center;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+/* Auto margins center the cluster vertically AND pin the CTA to the
+   bottom of the hero in one stroke (no absolute positioning). */
+.hero-content .hero-crest { margin-top: auto; }
+.hero-content p { margin-bottom: 0; }
+.hero-content::before { display: none; }
+.hero-content .eyebrow,
+.hero-content h1,
+.hero-content p { padding-left: 0; }
+.hero-content .eyebrow {
+  letter-spacing: 0.36em;
+  color: rgba(244, 237, 222, 0.84);
+  margin-bottom: 16px;
+}
+.hero-crest {
+  padding-left: 0;
+  margin: 0 auto 32px;
+  height: clamp(360px, 34vw, 520px);
+  display: flex;
+  justify-content: center;
+}
+.hero-content h1 {
+  max-width: none;
+  margin: 0 auto 26px;
+  letter-spacing: -0.04em;
+  text-shadow:
+    0 2px 36px rgba(0, 0, 0, 0.55),
+    0 1px 3px rgba(0, 0, 0, 0.35);
+}
+.hero-content p {
+  max-width: 640px;
+  margin: 0 auto;
+  text-shadow: 0 1px 22px rgba(0, 0, 0, 0.55);
+}
+/* CTA pinned to the bottom of the hero-content via auto margin */
+.hero-content .hero-link--btn {
+  position: static;
+  margin: auto 0 76px;
+  left: auto;
+  bottom: auto;
+  transform: none;
+}
+.hero-content .hero-link--btn:hover { transform: translateY(-1px); }
+.hero-scroll-cue { bottom: 22px; opacity: 0.78; }
+
+/* Stacked headline — 2-line composition, hero-scale. */
+.hero-content h1 {
+  font-size: clamp(54px, 6.8vw, 108px);
+  line-height: 0.94;
+  margin: 0 auto 22px;
+}
+.hero-content h1 span { display: block; }
+.hero-content {
+  filter: drop-shadow(0 8px 60px rgba(0, 0, 0, 0.35));
+}
+
+/* Push the YouTube title bar + watermark out of the visible frame and
+   guarantee the iframe always overflows the hero on every aspect ratio
+   (otherwise you see a dark band on landscape viewports). */
+.hero-video {
+  inset: -6% -8%;
+}
+.hero-video iframe {
+  width: 116vw;
+  height: 65.25vw;
+  min-width: 206vh;
+  min-height: 116vh;
+  transform: translate(-50%, -50%) scale(1.18);
+}
+
+
+@media (max-width: 900px){
+  .hero-inner { padding: 64px var(--pad-page) 56px; }
+  .hero-crest { height: clamp(300px, 42vw, 460px); margin: 0 auto 26px; }
+  .hero-content h1 { margin: 0 auto 20px; }
+}
+
+@media (max-width: 600px){
+  .hero-inner { padding: 56px 18px 52px; }
+  .hero-content .hero-link--btn { padding: 12px 22px; font-size: 11px; }
+  .hero-crest { margin: 0 auto 20px; height: clamp(220px, 56vw, 320px); }
+  .hero-content h1 { margin: 0 auto 18px; }
+}
+
+@media (max-width: 420px){
+  .hero-crest { height: clamp(200px, 60vw, 280px); margin: 0 auto 16px; }
+}
+
+/* (from original location, lines 3767-3784.) */
+.hero { position: relative; }
+.hero::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 12vh;
+  pointer-events: none;
+  z-index: 3;
+  background: linear-gradient(
+    to bottom,
+    rgba(20, 12, 8, 0) 0%,
+    rgba(20, 12, 8, 0.18) 60%,
+    rgba(20, 12, 8, 0.45) 100%
+  );
+}
+.hero .hero-inner,
+.hero .hero-content,
+.hero .hero-scroll-cue { position: relative; z-index: 4; }
+
+
+/* === end HERO -- single authoritative block === */
+
+/* Make the covenant top-fade deeper and taller so it overlaps the
+   hero's bottom seam, fully bridging the cut. */
+.covenant::before {
+  height: 14vh;
+  background: linear-gradient(
+    to bottom,
+    rgba(20, 12, 8, 0.85) 0%,
+    rgba(20, 12, 8, 0.55) 40%,
+    rgba(20, 12, 8, 0.15) 75%,
+    rgba(20, 12, 8, 0)    100%
+  );
+}
+
+/* ===================================================================
+   COVENANT -- single authoritative block
+   -------------------------------------------------------------------
+   Every covenant override (parallax transition, eyebrow / quote
+   color discipline, anchored Plate II chip, calmed Ken Burns
+   motion, drop-cap body rhythm, hero seam fade, and the seam-
+   safety background) lives in this single block. The base
+   .covenant / .covenant-* definitions still live near line 708
+   ('FROM COVENANT TO CONSTITUTION'); this block is the final
+   cascade layer that lands on top of them. Earlier draft /
+   polish-pass blocks were lifted out and replaced with one-line
+   breadcrumb comments pointing back here.
+   =================================================================== */
+
+/* (from original location, lines 1704-1707.) */
+/* Scroll-triggered parallax on covenant image */
+.covenant-image {
+  transition: transform 0.5s ease;
+}
+
+/* (from original location, lines 2297-2301.) */
+.eyebrow,
+.covenant-text .eyebrow {
+  color: #2b4d7a;
+  letter-spacing: 0.32em;
+}
+.covenant-text .eyebrow {
+  color: #f4eddc;
+  text-shadow: 0 1px 18px rgba(0, 0, 0, 0.5);
+}
+
+/* (from original location, lines 2323-2328.) */
+.covenant-quote {
+  color: #3b3631;
+  position: relative;
+  padding-left: 18px;
+  border-left: 2px solid rgba(184, 132, 42, 0.78);
+}
+
+/* (from original location, lines 2419-2441.) */
+/* E. COVENANT — chip-style Plate II caption + anchored right column */
+.covenant-image::before {
+  padding: 6px 10px;
+  background: rgba(15, 22, 34, 0.62);
+  color: rgba(244, 237, 222, 0.96);
+  border-left: 2px solid rgba(184, 132, 42, 0.92);
+  text-shadow: none;
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+.covenant-text {
+  position: relative;
+}
+.covenant-text::before {
+  content: '';
+  position: absolute;
+  left: clamp(26px, 3.2vw, 44px);
+  top: 0;
+  width: 36px;
+  height: 2px;
+  background: rgba(184, 132, 42, 0.85);
+}
+
+
+/* (from original location, lines 2520-2521.) */
+/* Remove PLATE II caption per user request */
+.covenant-image::before { content: none; display: none; }
+
+/* (from original location, lines 2620-2627.) */
+.covenant-image {
+  animation: covenantDrift 48s ease-in-out infinite alternate;
+}
+@keyframes covenantDrift {
+  from { transform: translateY(16px) rotate(-0.15deg) scale(1.012) translate3d(0, 0, 0); }
+  to   { transform: translateY(16px) rotate(-0.15deg) scale(1.022) translate3d(-0.4%, 0.3%, 0); }
+}
+
+
+/* (from original location, lines 2664-2682.) */
+.covenant-text p,
+.transition-copy p {
+  font-family: var(--serif);
+  font-size: clamp(18px, 1.32vw, 21px);
+  line-height: 1.62;
+  letter-spacing: -0.003em;
+  max-width: 60ch;
+}
+/* Drop cap on the longest narrative paragraph in Covenant. */
+.covenant-text > p:first-of-type::first-letter {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 3.4em;
+  line-height: 0.88;
+  float: left;
+  padding: 6px 12px 0 0;
+  color: var(--crimson);
+  font-style: italic;
+}
+
+/* (from original location, lines 3786-3800.) */
+.covenant { position: relative; }
+.covenant::before {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; top: 0;
+  height: 22vh;
+  pointer-events: none;
+  z-index: 2;
+  background: linear-gradient(
+    to bottom,
+    #1a1310 0%,
+    rgba(26, 19, 16, 0.92) 8%,
+    rgba(26, 19, 16, 0.62) 28%,
+    rgba(26, 19, 16, 0.28) 58%,
+    rgba(26, 19, 16, 0) 100%
+  );
+}
+.covenant .covenant-container { position: relative; z-index: 3; }
+
+/* (from original location, lines 4028-4044.) */
+.covenant {
+  background-size: auto, auto, 104% auto, auto;
+  background-position: 78% 50%, center, 50% 28%, center;
+  filter: saturate(0.85) brightness(0.96);
+  transition:
+    background-size 1600ms cubic-bezier(0.19, 1, 0.22, 1),
+    filter 1600ms cubic-bezier(0.19, 1, 0.22, 1);
+  animation: covenantKenBurns 32s ease-in-out 1700ms infinite alternate;
+}
+.covenant.reveal.visible {
+  background-size: auto, auto, 108% auto, auto;
+  filter: saturate(1) brightness(1);
+}
+@keyframes covenantKenBurns {
+  from { background-position: 78% 50%, center, 48% 26%, center; }
+  to   { background-position: 78% 50%, center, 52% 32%, center; }
+}
+
+
+/* === end COVENANT -- single authoritative block === */
+
+
+
+
+  /* Pillars eyebrow: crimson per design direction. */
+  #pillars .eyebrow { color: var(--crimson); }
+  
+  /* Gallery eyebrow: crimson per design direction. */
+  #gallery .gallery-header .eyebrow { color: var(--crimson); }
+  
+  /* Curriculum eyebrow: crimson per design direction. */
+  #curriculum .cur-header .eyebrow { color: var(--crimson); }
+  

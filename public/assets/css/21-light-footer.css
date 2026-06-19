@@ -1,0 +1,222 @@
+/* ═══════════════════════════════════════════════════════════════════
+   LIGHT FOOTER — re-tone admissions CTA + colophon footer onto a
+   parchment ground (was dark navy/brown). Sits at the end of the
+   cascade so it overrides 08-admissions, 09-footer, 12-elegance-pass,
+   15-ornate-and-seams, and 17-section-finals for the bottom region.
+   =================================================================== */
+
+/* ── Page-foot wrapper: shared parchment ground + single botanical
+   texture layer covering both .admissions and footer.footer-colophon.
+   One ::before tiles continuously across the combined height, so
+   there's no seam between sections and no per-section squish from
+   inconsistent tile sizing. ──────────────────────────────────────── */
+.page-foot {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: var(--parchment);
+  color: var(--ink);
+}
+
+.page-foot::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('../textures/ornate-frame.png');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  /* Parallax: pin the texture to the viewport so it sits behind the
+     scrolling content as a single, seamless image — no tile boundary,
+     no repeating motif. */
+  background-attachment: fixed;
+  mix-blend-mode: multiply;
+  opacity: 0.22;
+  filter: saturate(0.65) brightness(0.82);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Mobile fallback: iOS Safari doesn't honor background-attachment: fixed,
+   so use a single non-repeating cover image anchored to the wrapper.
+   Trades the parallax effect for a clean no-seam render on touch. */
+@media (max-width: 1024px), (hover: none) {
+  .page-foot::before {
+    background-attachment: scroll;
+    background-size: cover;
+  }
+}
+
+.page-foot > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Children: transparent grounds so the wrapper texture shows through. */
+section.admissions {
+  background: transparent;
+  background-color: transparent;
+  color: var(--ink);
+  margin-top: 0;
+  padding-top: clamp(120px, 14vh, 184px);
+}
+
+/* Wipe every dark-tuned overlay inherited from earlier layers
+   (Group 9 wash, radial scrims, ornate-frame screen-blend bands
+   from 15-ornate-and-seams). */
+.admissions::before,
+.admissions::after {
+  content: none;
+  background: none;
+  mix-blend-mode: normal;
+  -webkit-mask-image: none;
+          mask-image: none;
+  animation: none;
+}
+
+/* ── Headline + body: dark serif on light ────────────────────────── */
+.admissions h2,
+.admissions h2 em {
+  color: var(--ink);
+}
+
+/* Roll the "Begin at the Beginning" headline back to a calmer scale —
+   the global h2 token of clamp(48px, 5vw, 76px) was reading as an
+   oversized hero rather than a CTA. Match the rhythm of other section
+   headings (closer to a CTA than a chapter opener). */
+.admissions h2 {
+  font-size: clamp(34px, 3.2vw, 50px);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  margin: 20px 0 24px;
+}
+
+.admissions-body {
+  color: rgba(26, 20, 19, 0.72);
+  font-size: 19px;
+}
+
+/* Mobile: keep the same calmer hierarchy on small screens — the prior
+   tablet/phone overrides (10-animations-refinement, 11-responsive)
+   topped out at 42–48px which still reads oversized on the parchment
+   ground. */
+@media (max-width: 1100px) {
+  .admissions h2 {
+    font-size: clamp(28px, 4.2vw, 40px);
+  }
+}
+
+@media (max-width: 760px) {
+  .admissions h2 {
+    font-size: clamp(26px, 5.8vw, 34px);
+    margin: 18px 0 20px;
+  }
+  .admissions-body {
+    font-size: 17px;
+  }
+}
+
+@media (max-width: 420px) {
+  .admissions h2 {
+    font-size: clamp(24px, 6.4vw, 30px);
+  }
+}
+
+/* ── CTAs: primary = filled crimson, ghost = dark-outlined ───────── */
+.admissions-cta-row .cta-button,
+.admissions-cta-row .cta-button--primary {
+  background: var(--crimson);
+  color: var(--cream);
+  border: 1px solid var(--crimson);
+  box-shadow: 0 18px 40px -18px rgba(140, 28, 43, 0.45);
+}
+
+.admissions-cta-row .cta-button:hover,
+.admissions-cta-row .cta-button--primary:hover {
+  background: #6f1622;
+  border-color: #6f1622;
+  color: var(--cream);
+}
+
+.admissions-cta-row .cta-button.outline,
+.admissions-cta-row .cta-button--ghost {
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid rgba(26, 20, 19, 0.38);
+  box-shadow: none;
+}
+
+.admissions-cta-row .cta-button.outline:hover,
+.admissions-cta-row .cta-button--ghost:hover {
+  background: rgba(26, 20, 19, 0.06);
+  color: var(--ink);
+  border-color: rgba(26, 20, 19, 0.7);
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   COLOPHON FOOTER — parchment ground, ink type, light rules.
+   =================================================================== */
+
+footer.footer-colophon {
+  background: transparent;
+  color: var(--ink);
+}
+
+/* Crest: dark on light (drop the white-out filter). */
+.footer-colophon .colophon-crest,
+.footer-colophon .footer-logo {
+  opacity: 1;
+}
+
+.footer-colophon .colophon-crest img,
+.footer-colophon .footer-logo img {
+  filter: none;
+  opacity: 0.92;
+}
+
+/* Divider rules flanking the crest: ink-on-parchment low opacity. */
+.footer-colophon .colophon-rule {
+  background: linear-gradient(90deg,
+    rgba(26, 20, 19, 0) 0%,
+    rgba(26, 20, 19, 0.22) 50%,
+    rgba(26, 20, 19, 0) 100%);
+}
+
+/* Tagline + supporting line. */
+.footer-colophon .colophon-body {
+  color: var(--ink);
+}
+
+.footer-colophon .colophon-tagline,
+.footer-colophon .colophon-tagline em {
+  color: var(--ink);
+}
+
+.footer-colophon .colophon-subhead {
+  color: rgba(26, 20, 19, 0.62);
+}
+
+/* Column labels: muted ink eyebrow with ink hairline underline. */
+.footer-colophon .colophon-column h4.colophon-column-label {
+  color: rgba(26, 20, 19, 0.48);
+  border-bottom: 1px solid rgba(26, 20, 19, 0.14);
+}
+
+/* Link list. */
+.footer-colophon .colophon-column a {
+  color: rgba(26, 20, 19, 0.74);
+}
+
+.footer-colophon .colophon-column a:hover {
+  color: var(--crimson);
+}
+
+/* Established line + bottom copyright. */
+.footer-colophon .colophon-established {
+  color: rgba(26, 20, 19, 0.55);
+}
+
+.footer-colophon .footer-bottom {
+  border-top: 1px solid rgba(26, 20, 19, 0.12);
+  color: rgba(26, 20, 19, 0.5);
+}

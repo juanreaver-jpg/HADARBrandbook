@@ -1,0 +1,219 @@
+/* ═══════════════════════════════════════════════════════════════════
+   SAMPLE DAY SCHEDULE — refined hover choreography.
+   Previously a flat color fade. Now each row performs a small,
+   inertial sequence: the crimson rail draws downward (scaleY),
+   the row indents 8px, the bronze time slides 2px and tightens
+   to crimson, the activity tracks ever-so-slightly wider, and the
+   arrow eases in from the left rather than just popping opacity.
+   All on cubic-bezier(0.19,1,0.22,1) at 600ms for a settled,
+   editorial feel that matches the rest of the page.
+   ═══════════════════════════════════════════════════════════════════ */
+.day-schedule-item {
+  transition:
+    background 600ms cubic-bezier(0.19, 1, 0.22, 1),
+    padding-left 600ms cubic-bezier(0.19, 1, 0.22, 1),
+    color 420ms ease;
+}
+.day-schedule-item::before {
+  transform: scaleY(0);
+  transform-origin: top center;
+  transition:
+    transform 700ms cubic-bezier(0.19, 1, 0.22, 1),
+    opacity 420ms ease,
+    background 420ms ease;
+}
+.day-schedule-item::after {
+  transform: translate(-10px, -50%);
+  transition:
+    transform 700ms cubic-bezier(0.19, 1, 0.22, 1),
+    opacity 500ms ease,
+    color 420ms ease;
+}
+.day-schedule-item:hover,
+.day-schedule-item:focus-visible,
+.day-schedule-item.is-active {
+  padding-left: 26px;
+  background: linear-gradient(90deg,
+    rgba(140, 28, 43, 0.07) 0%,
+    rgba(140, 28, 43, 0.02) 50%,
+    rgba(140, 28, 43, 0) 100%);
+}
+.day-schedule-item:hover::before,
+.day-schedule-item:focus-visible::before,
+.day-schedule-item.is-active::before {
+  transform: scaleY(1);
+  opacity: 1;
+}
+.day-schedule-item:hover::after,
+.day-schedule-item:focus-visible::after,
+.day-schedule-item.is-active::after {
+  transform: translate(0, -50%);
+  opacity: 1;
+  color: var(--crimson);
+}
+
+.day-time {
+  transition:
+    color 420ms ease,
+    transform 600ms cubic-bezier(0.19, 1, 0.22, 1);
+}
+.day-schedule-item:hover .day-time,
+.day-schedule-item:focus-visible .day-time,
+.day-schedule-item.is-active .day-time {
+  transform: translateX(2px);
+}
+
+.day-activity {
+  transition:
+    color 420ms ease,
+    letter-spacing 600ms cubic-bezier(0.19, 1, 0.22, 1);
+}
+.day-schedule-item:hover .day-activity,
+.day-schedule-item:focus-visible .day-activity,
+.day-schedule-item.is-active .day-activity {
+  letter-spacing: 0.012em;
+}
+
+/* Reduced-motion respect: keep color cues, drop the motion. */
+
+@media (prefers-reduced-motion: reduce){
+  .day-schedule-item,
+  .day-schedule-item::before,
+  .day-schedule-item::after,
+  .day-time,
+  .day-activity {
+    transition: background 200ms ease, color 200ms ease, opacity 200ms ease !important;
+  }
+  .day-schedule-item:hover,
+  .day-schedule-item:focus-visible,
+  .day-schedule-item.is-active {
+    padding-left: 18px !important;
+  }
+  .day-schedule-item::before { transform: scaleY(1); }
+  .day-schedule-item::after { transform: translate(0, -50%); }
+  .day-schedule-item:hover .day-time,
+  .day-schedule-item:focus-visible .day-time,
+  .day-schedule-item.is-active .day-time { transform: none; }
+  .day-schedule-item:hover .day-activity,
+  .day-schedule-item:focus-visible .day-activity,
+  .day-schedule-item.is-active .day-activity { letter-spacing: 0; }
+}
+
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   GALLERY — caption stack + meta cleanup.
+   Two bugs from the device check:
+   1) The slide eyebrow span was `display: inline-flex`, so the
+      dash + "CIVIC" rendered on the same line as the title:
+      "— CIVIC  Honoring our nation and values." Switching to
+      block-level `flex` drops the title to its own line and the
+      14px margin actually does its job.
+   2) The `.gallery-meta` row holds a counter + caption; the
+      caption is already deduped (display:none) so the lone
+      "02 / 11" floated to the left of an empty row beneath the
+      slide — visually orphaned, and redundant with the dots that
+      already show the active slide. Hide the meta row entirely.
+   ═══════════════════════════════════════════════════════════════════ */
+/* (moved to 'GALLERY -- single authoritative block' further down in this file.) */
+
+/* ═══════════════════════════════════════════════════════════════════
+   FULL-BLEED IMAGES — Ken Burns drift + one-shot enter reveal.
+   Replaces scroll parallax. Two complementary motions:
+    1) ENTER REVEAL — image eases from soft / slightly desaturated
+       to full color + a touch wider over ~1.6s, once, via the
+       existing `.reveal` → `.visible` IntersectionObserver.
+    2) AMBIENT KEN BURNS — slow (~32s) infinite-alternate drift
+       on the image layer. Subtle scale + pan, like a museum kiosk.
+   ═══════════════════════════════════════════════════════════════════ */
+/* (moved to 'COVENANT -- single authoritative block' further down in this file.) */
+
+.transition::before {
+  opacity: 0;
+  transform: scale(1.10);
+  filter: saturate(0.78) contrast(1.05) brightness(0.84);
+  transition:
+    opacity 1400ms cubic-bezier(0.19, 1, 0.22, 1),
+    transform 1800ms cubic-bezier(0.19, 1, 0.22, 1),
+    filter 1800ms cubic-bezier(0.19, 1, 0.22, 1);
+  will-change: transform, opacity, filter;
+  animation: none;
+}
+.transition.reveal.visible::before {
+  opacity: 1;
+  transform: scale(1.04);
+  filter: saturate(1.02) contrast(1.05) brightness(0.92);
+  animation: transitionKenBurns 36s ease-in-out 1800ms infinite alternate;
+}
+@keyframes transitionKenBurns {
+  from { transform: scale(1.04) translate3d(0, 0, 0); }
+  to   { transform: scale(1.09) translate3d(0.8%, -0.6%, 0); }
+}
+
+
+@media (prefers-reduced-motion: reduce){
+  .covenant, .transition::before {
+    animation: none !important;
+    transition: none !important;
+  }
+  .covenant.reveal.visible {
+    background-size: auto, auto, 106% auto, auto !important;
+    filter: saturate(1) brightness(1);
+  }
+  .transition.reveal.visible::before {
+    opacity: 1;
+    transform: scale(1.04);
+    filter: saturate(1.02) contrast(1.05) brightness(0.92) !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   LIBRARY ("As It Was Written") — editorial spread redo.
+   Header up top (already in flow), then a 2-col grid: slim titles-
+   only rail on the left, large book on the right. No info plate —
+   the book IS the artifact.
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* Two-column editorial grid: narrow rail + book stage */
+
+/* Index becomes a clean titles-only column; hide all the author /
+   category metadata and the trailing count caption. */
+
+/* Kill the info plate entirely — book stands alone */
+
+/* Right side: book is the only thing. Recenter the scene so it sits
+   cleanly inside its column and isn't cropped by the section bottom. */
+/* Book bounded by the scene height; width follows ~0.71 book aspect. */
+
+/* ═══════════════════════════════════════════════════════════════════
+   LIBRARY redo v2 — kill right-side dead space + rework book motion.
+   The right column is now hero-sized: the book fills it, anchored
+   right, with a fresh animation suite (entry rise, idle drift,
+   spine glow pulse, cover sheen sweep, hover tilt-open).
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* Reframe grid: rail can be slimmer, book column gets the air it needs */
+
+/* Right column is now the hero — book fills it.
+   Scene height is bounded by viewport so the book is never
+   cropped by section padding above/below. */
+
+/* Book fills the right column — height drives, width follows
+   the ~0.71 aspect ratio. Bounded so it stays inside the scene
+   padding while killing the previous dead space. */
+
+/* ENTRY — book rises into place from below, settling at rest pose */
+/* IDLE — slow breathing tilt, almost imperceptible */
+/* HOVER — gentle lift + brightness; transform interpolates
+   smoothly from whatever pose the idle animation is currently in. */
+/* Hover: keep idle breathing alive but pause it gently —
+   animation-play-state lets the :hover transform interpolate
+   from the current idle pose instead of snapping. */
+
+/* COVER SHEEN — a slow diagonal light sweep across the cover.
+   Lives on the existing .lib-cover-sheen element. */
+/* SPINE GLOW — slow warm pulse on the book spine to suggest gilt edge */
+/* FLOOR SHADOW — anchors the book; subtle breath in sync with idle */
+/* BOOK SWITCH — gentle cover fade only; the book itself keeps
+   its idle breathing so swapping titles never "resets" the pose. */
+

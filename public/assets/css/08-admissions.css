@@ -1,0 +1,77 @@
+/* ═════════════════════════════════════════════════════════════════════
+   ADMISSIONS CTA
+   ═════════════════════════════════════════════════════════════════════ */
+
+.admissions {
+  background: #16294f;
+  color: var(--cream);
+  padding: 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.admissions::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 70% 60% at 50% 40%, rgba(140, 28, 43, 0.55) 0%, rgba(107, 18, 32, 0.35) 38%, rgba(22, 41, 79, 0) 70%),
+    linear-gradient(160deg, rgba(22, 41, 79, 0.92) 0%, rgba(22, 41, 79, 0.78) 48%, rgba(61, 41, 20, 0.58) 100%);
+  pointer-events: none;
+  animation: admissionsGlow 18s ease-in-out infinite alternate;
+}
+
+.admissions-container {
+  max-width: calc(720px + (var(--pad-page) * 2));
+  margin: 0 auto;
+  padding: 184px var(--pad-page) 112px;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 1;
+}
+
+.admissions h2 {
+  margin: 32px 0;
+}
+
+.admissions h2 em {
+  font-style: italic;
+  color: var(--cream);
+}
+
+.admissions-body {
+  font-family: var(--serif);
+  font-size: 22px;
+  line-height: 1.5;
+  color: rgba(244, 237, 222, 0.9);
+  margin-bottom: 56px;
+}
+
+.admissions-cta-row {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.admissions-cta-row .cta-button {
+  padding: 18px 36px;
+  font-size: 14px;
+  background: var(--cream);
+  color: var(--crimson);
+  border-color: var(--cream);
+}
+
+.admissions-cta-row .cta-button.outline {
+  background: transparent;
+  color: var(--cream);
+  border-color: rgba(244, 237, 222, 0.7);
+}
+
+.admissions-cta-row .cta-button.outline:hover {
+  background: rgba(244, 237, 222, 0.1);
+  color: var(--cream);
+  border-color: var(--cream);
+}
+

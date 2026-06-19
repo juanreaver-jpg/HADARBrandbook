@@ -1,0 +1,34 @@
+/* ═════════════════════════════════════════════════════════════════════
+   LIBRARY / READING CULTURE
+   ═════════════════════════════════════════════════════════════════════ */
+
+/* ── Left: curated reading-list index ── */
+
+  /* Left accent rail — tinted by the active book's accent color */
+
+  /* Right-edge connector — visually links the active entry across to the floating cover */
+
+/* ── Right: 3D book + details ── */
+
+/* The 3D book */
+/* Front cover face */
+
+/* Sheen layer on cover */
+
+/* "Now reading" indicator — quiet handshake from the active list item to the floating cover */
+
+/* Spine — left face, proper 3D */
+
+/* Pages — right edge stack */
+
+/* Top edge disabled: it collapsed into a stray striped line over the cover in perspective. */
+
+/* Floor shadow beneath the book */
+
+/* Book info block */
+
+@keyframes railGlow {
+  from { opacity: 0.58; transform: scaleY(0.96); }
+  to { opacity: 1; transform: scaleY(1.02); }
+}
+

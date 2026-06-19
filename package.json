@@ -1,0 +1,12 @@
+{
+  "scripts": {
+    "vrt": "node scripts/visual-regression.js",
+    "vrt:update": "node scripts/visual-regression.js --update"
+  },
+  "dependencies": {
+    "jsdom": "^29.1.1",
+    "pixelmatch": "^7.2.0",
+    "playwright": "^1.60.0",
+    "pngjs": "^7.0.0"
+  }
+}

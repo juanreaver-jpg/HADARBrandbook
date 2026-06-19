@@ -1,0 +1,562 @@
+/* ═══════════════════════════════════════════════════════════════════
+   READING LIST — ROUND 2
+   1) Headline on 2 lines max
+   2) Book bigger, fills the section
+   3) Smooth first-hover (no snap from killed idle animation)
+   =================================================================== */
+
+/* Section: taller so the book has room to breathe big. */
+
+/* Header: wider so headline fits in 2 lines (don’t exceed 2). */
+
+/* Layout: book column takes more of the row; both stretch. */
+
+/* Book scene: fills the cell, more vertical room. */
+
+/* ── Hover animation smoothing ─────────────────────────────────────
+   Earlier rules killed the idle animation outright on :hover, which
+   made the FIRST hover snap (the running transform jumped to the
+   static state instantly, ignoring transition because animation
+   overrides transitioned values). Switch to paused-on-hover instead
+   so the book holds its current frame and the hover transform
+   interpolates from there smoothly. */
+/* Re-declare base transition shorter so first interaction feels
+   responsive instead of glacial. */
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   A DAY AT HADAR — SCHEDULE SECTION FIX
+   Earlier seam-fix forced day-section to dark brown, which made
+   its dark-on-light typography invisible. Restore the warm
+   parchment bg this section was designed for, tighten padding,
+   and lift contrast on the schedule rows.
+   =================================================================== */
+
+section.day-section {
+  background: #f6efe2;   /* warm parchment */
+  color: #1f1816;
+  padding: clamp(72px, 9vh, 120px) var(--pad-page);
+  margin-bottom: 0;
+}
+
+/* Header */
+.day-section .day-header { margin-bottom: clamp(40px, 5vh, 64px); }
+.day-section .day-header h2 {
+  color: #1f1816;
+  margin-top: 10px;
+  margin-bottom: 0;
+}
+.day-section .day-header h2 em { color: #8b1818; }
+.day-section .day-header .eyebrow { color: #8b1818; }
+.day-section .day-header-link a {
+  color: #1f1816;
+  opacity: 0.78;
+}
+.day-section .day-header-link a:hover { opacity: 1; }
+
+/* Schedule typography */
+.day-section .day-schedule-label { color: #8b1818; }
+.day-section .day-schedule {
+  border-top: 1px solid rgba(31, 24, 22, 0.14);
+}
+.day-section .day-schedule-item {
+  border-bottom: 1px solid rgba(31, 24, 22, 0.10);
+}
+.day-section .day-time {
+  color: rgba(139, 24, 24, 0.85);
+  font-weight: 500;
+}
+.day-section .day-activity { color: rgba(31, 24, 22, 0.88); }
+.day-section .day-schedule-item:hover,
+.day-section .day-schedule-item:focus-visible,
+.day-section .day-schedule-item.is-active {
+  background: linear-gradient(90deg, rgba(139, 24, 24, 0.07), rgba(139, 24, 24, 0));
+}
+.day-section .day-schedule-item.is-active .day-time,
+.day-section .day-schedule-item:hover .day-time { color: #8b1818; }
+.day-section .day-schedule-item.is-active .day-activity,
+.day-section .day-schedule-item:hover .day-activity { color: #1f1816; }
+.day-section .day-schedule-item::before { background: #8b1818; }
+
+/* Image grid: single big hero image instead of fragile 2x2 grid */
+.day-section .day-grid {
+  grid-template-rows: clamp(420px, 60vh, 620px);
+  grid-template-columns: 1fr;
+}
+.day-section .day-grid-item.large {
+  background-size: cover;
+  background-position: center;
+}
+
+
+/* Day section image: force the hero image to actually render */
+.day-section .day-grid-item.large {
+  grid-row: 1 / 2;
+  grid-column: 1 / 2;
+  background-size: cover;
+  background-position: center;
+  min-height: clamp(420px, 60vh, 620px);
+  border-radius: 8px;
+}
+.day-section .day-grid-item.large::after {
+  background-size: cover;
+  z-index: 0;
+}
+.day-section .day-grid-item.large::before {
+  opacity: 0;
+}
+
+
+/* Day section: force image to render regardless of reveal state */
+.day-section .day-body,
+.day-section .day-media,
+.day-section .day-grid,
+.day-section .day-grid-item.large {
+  opacity: 1;
+  transform: none;
+  visibility: visible;
+}
+.day-section .day-grid-item.large {
+  background-color: #1a1310; /* fallback while loading */
+}
+
+
+/* Transition headline plate: smaller / tighter */
+.transition-label {
+  padding: clamp(16px, 2.5vh, 28px) clamp(22px, 3vw, 44px);
+  font-size: clamp(28px, 3vw, 44px);
+  max-width: min(640px, 86vw);
+}
+
+
+/* Gallery: restore parchment bg (earlier seam-fix forced it dark,
+   which made the white-overlay ::before paint weird bright bands). */
+section.gallery {
+  background: #f6efe2;
+  margin-bottom: 0;
+  padding: clamp(72px, 9vh, 120px) var(--pad-page);
+}
+section.gallery::before {
+  background:
+    radial-gradient(circle at 12% 16%, rgba(140, 28, 43, 0.06) 0%, rgba(140, 28, 43, 0) 28%),
+    radial-gradient(circle at 88% 80%, rgba(61, 41, 20, 0.05) 0%, rgba(61, 41, 20, 0) 30%);
+}
+
+
+/* ===================================================================
+   GALLERY -- single authoritative block
+   -------------------------------------------------------------------
+   Every gallery override (restrained editorial nav + counter,
+   editorial redesign of the carousel frame / scrim / caption,
+   duplicate-meta-caption cleanup, and the parchment-bg restore)
+   lives in this single block. The base .gallery / .gallery-*
+   definitions still live near line 1167 ('GALLERY'); this block
+   is the final cascade layer that lands on top of them. Earlier
+   draft / polish-pass blocks were lifted out and replaced with
+   one-line breadcrumb comments pointing back here.
+   =================================================================== */
+
+/* (from original location, lines 2684-2772.) */
+/* — GALLERY: restrained editorial controls + counter — */
+.gallery-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 18px;
+  margin-top: 22px;
+  padding: 14px 6px 0;
+  border-top: 1px solid rgba(26, 20, 19, 0.10);
+}
+.gallery-counter {
+  font-family: var(--sans);
+  font-size: 10px;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: var(--crimson);
+  opacity: 0.78;
+}
+.gallery-meta .gallery-caption {
+  display: block;
+  position: static;
+  left: auto; right: auto; bottom: auto;
+  font-family: var(--serif);
+  font-size: 14px;
+  line-height: 1.4;
+  color: rgba(26, 20, 19, 0.62);
+  text-shadow: none;
+  font-style: italic;
+  max-width: 56%;
+  text-align: right;
+}
+.gallery-meta .gallery-caption span { display: none; }
+.gallery-nav {
+  width: 42px;
+  height: 42px;
+  border-radius: 1px;
+  border: 1px solid rgba(26, 20, 19, 0.16);
+  background: transparent;
+  color: rgba(26, 20, 19, 0.55);
+  font-size: 0;
+  position: relative;
+  transition:
+    border-color 360ms cubic-bezier(0.22, 0.61, 0.36, 1),
+    color 360ms cubic-bezier(0.22, 0.61, 0.36, 1),
+    background 360ms cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+.gallery-nav::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 12px;
+  height: 1px;
+  background: currentColor;
+  transform: translate(-50%, -50%);
+  transition: width 360ms cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+.gallery-nav::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 7px;
+  height: 7px;
+  border-top: 1px solid currentColor;
+  transform: translateY(-50%) rotate(45deg);
+  transition: transform 360ms cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+.gallery-nav.prev::before {
+  left: 13px;
+  border-left: 1px solid currentColor;
+  border-top: 1px solid currentColor;
+  border-right: 0;
+  border-bottom: 0;
+}
+.gallery-nav.next::before {
+  right: 13px;
+  border-right: 1px solid currentColor;
+  border-top: 1px solid currentColor;
+  border-left: 0;
+  border-bottom: 0;
+  transform: translateY(-50%) rotate(45deg);
+}
+.gallery-nav.prev::before { transform: translateY(-50%) rotate(-45deg); }
+.gallery-nav:hover {
+  border-color: var(--crimson);
+  color: var(--crimson);
+  transform: none;
+  background: transparent;
+}
+
+/* (from original location, lines 3543-3680.) */
+/* ─────────────────────────────────────────────────────────────────────
+   GALLERY — editorial redesign.
+   The boxy cream "plate" framing and the hard horizontal scrim felt
+   disconnected from the rest of the book. This treatment leans into
+   the same editorial language as the Covenant / Library spreads:
+   a clean dark frame, soft asymmetric vignette, and a typographic
+   caption (bronze eyebrow + serif headline) anchored bottom-left.
+   ───────────────────────────────────────────────────────────────── */
+
+/* Kill the "GALLERY PLATE" eyebrow + the heavy cream double frame. */
+.gallery-viewport::before { content: none; display: none; }
+.gallery-viewport {
+  background: #120d0f;
+  border: 1px solid rgba(26, 20, 19, 0.16);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.6) inset,
+    0 40px 90px -28px rgba(26, 20, 19, 0.28);
+}
+.gallery-slide {
+  height: min(78vh, 820px);
+}
+/* Drop the inner hairline rectangle — it framed the "plate" idea. */
+.gallery-slide::before { content: none; }
+
+/* Image: stop the perpetual breathing scale so the eye rests on the
+   photograph. A single subtle ease-out on slide change is enough. */
+.gallery-slide img {
+  animation: none;
+  transform: none;
+  filter: saturate(1.02) contrast(1.02) brightness(0.98);
+}
+
+/* Scrim: full inset (frame is now gone) with a graceful bottom-left
+   vignette so the caption sits naturally rather than against a band. */
+.gallery-slide::after {
+  inset: 0;
+  background:
+    radial-gradient(ellipse 70% 80% at 0% 100%,
+      rgba(8, 10, 14, 0.70) 0%,
+      rgba(8, 10, 14, 0.36) 40%,
+      rgba(8, 10, 14, 0) 72%),
+    linear-gradient(180deg,
+      rgba(8, 10, 14, 0) 50%,
+      rgba(8, 10, 14, 0.05) 68%,
+      rgba(8, 10, 14, 0.45) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Caption: editorial split — bronze eyebrow above a serif line, with
+   a short hairline divider to echo the eyebrow rules used elsewhere. */
+.gallery-caption {
+  left: clamp(28px, 4vw, 56px);
+  right: clamp(28px, 4vw, 56px);
+  bottom: clamp(26px, 3.6vw, 44px);
+  max-width: min(640px, 70%);
+  z-index: 2;
+  font-family: var(--serif);
+  font-size: clamp(20px, 1.85vw, 28px);
+  line-height: 1.32;
+  color: #f4eddc;
+  text-shadow: 0 2px 22px rgba(0, 0, 0, 0.55);
+}
+.gallery-caption span {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+  font-family: var(--sans);
+  font-size: 10px;
+  letter-spacing: 0.36em;
+  text-transform: uppercase;
+  color: #d9a84a;
+  text-shadow: 0 1px 14px rgba(0, 0, 0, 0.55);
+}
+.gallery-caption span::before {
+  content: '';
+  width: 28px;
+  height: 1px;
+  background: #d9a84a;
+  opacity: 0.85;
+}
+
+/* Meta row: align with editorial tone, bronze counter + thin dots. */
+.gallery-meta {
+  margin-top: 22px;
+  padding: 0 4px;
+  color: #5a4b42;
+}
+.gallery-counter {
+  font-size: 10px;
+  letter-spacing: 0.34em;
+  color: #8c1c2b;
+  opacity: 0.78;
+}
+.gallery-dots { margin-top: 14px; }
+.gallery-dot {
+  width: 7px;
+  height: 7px;
+  border-color: rgba(140, 28, 43, 0.45);
+  background: transparent;
+  transition: background 280ms ease, transform 280ms ease, box-shadow 280ms ease;
+}
+.gallery-dot.active {
+  background: #8c1c2b;
+  transform: scale(1.18);
+  box-shadow: 0 0 0 5px rgba(140, 28, 43, 0.08);
+}
+
+/* Nav arrows: quieter, no white plate look, sit just inside the frame. */
+.gallery-nav {
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(26, 20, 19, 0.16);
+  background: rgba(250, 246, 240, 0.0);
+  color: #3b3631;
+  backdrop-filter: blur(2px);
+  transition: background 280ms ease, color 280ms ease, transform 280ms ease;
+}
+.gallery-nav:hover {
+  background: #1a1413;
+  color: #f4eddc;
+  transform: scale(1.04) translateY(-1px);
+}
+
+/* Section padding: tighten to match the rhythm of Covenant/Library. */
+.gallery {
+  padding: clamp(96px, 11vh, 152px) var(--pad-page) clamp(88px, 10vh, 136px);
+}
+
+
+@media (max-width: 600px){
+  .gallery-slide { height: 70vh; }
+  .gallery-caption {
+    max-width: 100%;
+    font-size: 18px;
+  }
+}
+
+/* (from original location, lines 3754-3757.) */
+.gallery-meta .gallery-caption {
+  display: none;
+}
+.gallery-meta { justify-content: space-between; }
+
+/* (from original location, lines 4012-4017.) */
+.gallery-caption span {
+  display: flex;
+  width: max-content;
+  max-width: 100%;
+}
+.gallery-meta { display: none; }
+
+
+/* (from original location, the shared section-seam rule near line 4178.) */
+/* Seam-cleanup overlap only — gallery bg stays parchment (see line 134).
+   The earlier dark-bg "safety" override was wrong: gallery is a parchment
+   section between dark neighbours, not a dark section. */
+.gallery {
+  margin-bottom: -1px;
+}
+
+/* (from original location, lines 382-388 and 1675-1681 — the shared
+   'Keyboard focus styles' rule.) */
+.gallery-dot:focus-visible,
+.gallery-nav:focus-visible {
+  outline: 3px solid var(--crimson);
+  outline-offset: 2px;
+}
+
+/* (from original location, lines 390-398 and 1683-1691 — the
+   'Gallery item premium hover' block.) */
+.gallery-item {
+  transition: all 520ms var(--ease);
+}
+.gallery-item:hover {
+  transform: scale(1.04);
+  box-shadow: 0 12px 48px rgba(26, 20, 19, 0.25);
+}
+
+
+/* === end GALLERY -- single authoritative block === */
+
+
+/* Admissions: close seam against the parchment .gallery above */
+section.admissions {
+  margin-top: -2px;
+  position: relative;
+  z-index: 1;
+}
+
+
+/* (Nav top:-1px pin moved into the consolidated navbar block.) */
+
+/* ═══════════════════════════════════════════════════════════════════
+   Force all .reveal elements visible. The IntersectionObserver
+      based reveal was leaving sections at opacity 0 on direct
+      scroll/hash navigation, hiding most content below the fold.
+      Make every .reveal element visible immediately so scrolling
+      shows everything.
+   =================================================================== */
+.reveal,
+.reveal.reveal,
+section .reveal,
+.reveal.text-motion,
+.hero-left.reveal,
+.hero-right.reveal {
+  opacity: 1;
+  transform: none;
+  visibility: visible;
+  filter: none;
+}
+.reveal .text-motion .premium-word,
+.reveal .premium-word {
+  opacity: 1;
+  transform: none;
+}
+
+  /* =====================================================================
+     TASK 17 — Editorial upgrades for flat sections
+     (Day at Hadar, Transition/Founders, Gallery)
+     Reuses existing tokens: --crimson, --bronze, --serif, --sans,
+     --pad-page, --max-w, --ease, --ease-soft, --dur-base, --dur-slow.
+     ===================================================================== */
+
+  /* --- DAY AT HADAR --- */
+
+  .day-section .day-body {
+    grid-template-columns: minmax(0, 1fr) minmax(320px, 1fr);
+    align-items: start;
+  }
+
+  .day-section .day-stage {
+    position: sticky;
+    top: 96px;
+    display: block;
+  }
+
+  .day-section .day-stage-frame {
+    position: relative;
+    isolation: isolate;
+    box-shadow:
+      0 0 0 12px rgba(248, 242, 234, 0.92),
+      0 0 0 13px rgba(26, 20, 19, 0.06),
+      0 28px 64px rgba(26, 20, 19, 0.14);
+    overflow: hidden;
+  }
+
+  .day-section .day-hero {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 5 / 4;
+    max-height: 560px;
+    min-height: 0;
+    grid-row: auto;
+    box-shadow: none;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .day-section .day-hero::before {
+    background:
+      linear-gradient(180deg, rgba(15, 22, 34, 0) 38%, rgba(15, 22, 34, 0.66) 100%),
+      radial-gradient(circle at 84% 14%, rgba(255,255,255,0.10), transparent 32%);
+    opacity: 1;
+  }
+
+  .day-section .day-stage-corner {
+    position: absolute;
+    top: 16px;
+    left: 18px;
+    z-index: 3;
+    font-family: var(--sans);
+    font-size: 9px;
+    letter-spacing: 0.34em;
+    text-transform: uppercase;
+    color: rgba(244, 237, 222, 0.85);
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
+    pointer-events: none;
+  }
+
+  .day-section .day-stage-plate {
+    position: absolute;
+    left: 22px;
+    right: 22px;
+    bottom: 22px;
+    z-index: 3;
+    display: grid;
+    grid-template-columns: 2px 1fr;
+    column-gap: 16px;
+    row-gap: 6px;
+    align-items: start;
+    padding: 18px 20px 18px 18px;
+    background: linear-gradient(180deg, rgba(15, 22, 34, 0.04) 0%, rgba(15, 22, 34, 0.42) 100%);
+    backdrop-filter: blur(4px) saturate(1.05);
+    -webkit-backdrop-filter: blur(4px) saturate(1.05);
+    color: var(--white);
+    transition: opacity var(--dur-base) var(--ease), transform var(--dur-base) var(--ease);
+  }
+
+  .day-section .day-hero.is-switching ~ .day-stage-plate {
+    opacity: 0.4;
+    transform: translateY(4px);
+  }
+
+  .day-section .day-stage-tick {
+    grid-row: 1 / 3;
+    align-self: stretch;
+    width: 2px;
+    background: linear-gradient(180deg, #e8cf8d, rgba(232, 207, 141, 0));
+  }
+

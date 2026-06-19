@@ -1,0 +1,172 @@
+/* ═══════════════════════════════════════════════════════════════════
+   ORNATE FRAME TEXTURE — Library + Admissions
+   Adds an engraved still-life (fruits, grapes, foliage) framing
+   the top edges of the Library and Admissions sections. The art
+   is loaded as a single full-width background image positioned at
+   the top so the left/right ornaments hug the section corners,
+   leaving the centre clear for content. Low opacity + multiply
+   blend so it integrates with the dark covenant brown.
+   ═══════════════════════════════════════════════════════════════════ */
+
+.admissions {
+  position: relative;
+}
+
+.admissions > * {
+  position: relative;
+  z-index: 1;
+}
+
+.admissions::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0;
+  top: 0;
+  height: clamp(220px, 32vh, 380px);
+  background-image: url('../textures/ornate-frame.png');
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: 100% auto;
+  opacity: 0.18;
+  mix-blend-mode: screen;
+  /* Fade the texture into the section on ALL edges so there are
+     no hard rectangular seams. Inner edge (bottom) fades fastest
+     so the frame reads as a soft crown. */
+  -webkit-mask-image:
+    linear-gradient(to bottom, #000 0%, #000 40%, transparent 100%),
+    linear-gradient(to right, transparent 0%, #000 18%, #000 82%, transparent 100%);
+  -webkit-mask-composite: source-in;
+          mask-image:
+    linear-gradient(to bottom, #000 0%, #000 40%, transparent 100%),
+    linear-gradient(to right, transparent 0%, #000 18%, #000 82%, transparent 100%);
+          mask-composite: intersect;
+  pointer-events: none;
+  z-index: 0;
+}
+/* Mirror a second copy at the bottom of .admissions only — on
+   .library the book would cross the bottom texture and look cut. */
+.admissions::before {
+  content: '';
+  position: absolute;
+  left: 0; right: 0;
+  bottom: 0;
+  height: clamp(220px, 32vh, 380px);
+  background-image: url('../textures/ornate-frame.png');
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  background-size: 100% auto;
+  opacity: 0.14;
+  mix-blend-mode: screen;
+  transform: scaleY(-1);
+  -webkit-mask-image:
+    linear-gradient(to bottom, #000 0%, #000 40%, transparent 100%),
+    linear-gradient(to right, transparent 0%, #000 18%, #000 82%, transparent 100%);
+  -webkit-mask-composite: source-in;
+          mask-image:
+    linear-gradient(to bottom, #000 0%, #000 40%, transparent 100%),
+    linear-gradient(to right, transparent 0%, #000 18%, #000 82%, transparent 100%);
+          mask-composite: intersect;
+  pointer-events: none;
+  z-index: 0;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   HERO → COVENANT SEAM — kill the cream sliver
+   The body's parchment bg shows through any sub-pixel gap between
+   <section.hero> and <section.covenant>. Force the seam closed with
+   a 2px negative-margin overlap and a brown safety bg on the
+   sections themselves so even if a gap opens it stays dark.
+   =================================================================== */
+section.hero {
+  background-color: #140c08;
+  margin-bottom: -2px;
+}
+/* (moved to 'COVENANT -- single authoritative block' further down in this file.) */
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   SECTION SEAM CLEANUP — close gaps anywhere the parchment body
+   bg could leak between two dark sections. Same approach as the
+   hero → covenant fix: solid safety bg + tiny negative overlap.
+   =================================================================== */
+.day-section,
+.founders-canon {
+  background-color: #1a1310;
+  margin-bottom: -1px;
+}
+/* (.gallery section-seam safety bg moved to 'GALLERY -- single
+   authoritative block' further down in this file.) */
+.admissions {
+  background-color: #1a1310;
+  margin-top: 0;
+  padding-top: clamp(80px, 10vh, 140px);
+}
+/* Also pull the admissions::after texture down a touch so its top
+   fade starts inside the brown safety bg, not at the very pixel
+   edge where any sub-pixel gap would peek through. */
+.admissions::after {
+  top: 0;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   READING LIST — REDO FROM SCRATCH
+   Goal: kill dead space. Tight section padding, compact header
+   sitting on one band, two-column body where the book HEIGHT
+   matches the reading-list HEIGHT exactly (no empty right column).
+   Single source of truth; overrides all prior library layout CSS.
+   =================================================================== */
+
+/* Section: minimal vertical padding, no banner-tall texture. */
+
+/* Header: compact band. Eyebrow + h2 + sub stacked tight, no oversized
+   margins. */
+
+/* Layout: two columns, items stretched so book height = list height. */
+
+/* Left rail — reading list, compact + dense. */
+
+/* Right side — display fills the grid cell completely. */
+
+/* Scene = full cell height, with safe horizontal padding. */
+
+/* Book = matches scene height exactly; width follows ~0.71 aspect.
+   No fixed cap — it expands to fill whatever the reading list
+   gives us, so there's no dead space below or beside it. */
+
+/* Kill the top ornate texture band on .library — it added ~380px
+   of decorative dead space above the content. The covenant brown
+   section bg now stands alone, letting the content breathe. */
+
+/* Mobile: stack — list on top, book below, both still tight. */
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   TRANSITION SECTION — remove dark gradient overlay, add glass
+   panel behind the headline so the library photo shows clearly
+   and the text still reads.
+   =================================================================== */
+
+/* Show the library photo at full brightness with no gradient overlay. */
+.transition::before {
+  filter: saturate(0.95) contrast(1.06) brightness(0.96);
+}
+
+/* Glass panel behind the headline. h2 becomes its own framed
+   plate — frosted, hairline-bordered, centered. */
+.transition-label {
+  display: inline-block;
+  padding: clamp(28px, 4vh, 56px) clamp(36px, 5vw, 80px);
+  background: rgba(18, 24, 38, 0.32);
+  -webkit-backdrop-filter: blur(14px) saturate(1.05);
+  backdrop-filter: blur(14px) saturate(1.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 6px;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.08) inset,
+    0 30px 80px -20px rgba(0, 0, 0, 0.55);
+  text-shadow: 0 1px 24px rgba(0, 0, 0, 0.45);
+}
+
+
