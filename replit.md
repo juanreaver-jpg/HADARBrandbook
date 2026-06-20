@@ -3,7 +3,10 @@
 Mostly-static HTML site (single `index.html` with supporting assets) for the HADAR brand book, served by a thin Flask backend (`app.py`) that also generates one download on demand.
 
 ## Setup
-- The served site lives in `public/` (`index.html`, `MainWebsiteMockup.html`, `prompting-guide.html`, and `assets/`). Everything else (`attached_assets/`, `screenshots/`, `scripts/`, configs) is source/dev material kept outside the served tree.
+- See `SETUP.md` for clone-to-run instructions (deps, serve command, downloads, VRT).
+- The served site lives in `public/` (`index.html`, `MainWebsiteMockup.html`, `prompting-guide.html`, and `assets/`). Everything else (`screenshots/baseline/`, `scripts/`, configs) is source/dev material kept outside the served tree.
+- **Assets are web-optimized.** Served images in `public/assets/` are sized for display, not print: large illustrations/photos are resized to ~1600px on the long edge (JPEG q82) and oversized PNGs (book covers, `Moses_full`, the art-direction shadows) were converted to WebP. Original full-res masters and the former `attached_assets/` staging folder are **not** in the repo — restore them from the project source backup archive if you need to regenerate a higher-res asset.
+- **`.gitignore`:** `attached_assets/` and `.local/` are ignored; `screenshots/` is ignored *except* `screenshots/baseline/` (the committed VRT baselines), via the `screenshots/*` + `!screenshots/baseline/` form. Do not collapse that back to a bare `screenshots/` rule or the baselines stop being tracked.
 - Served via Flask (`app.py`) on port 5000, run under gunicorn (workflow: `Start application` → `gunicorn --bind 0.0.0.0:5000 --workers 1 --threads 4 --timeout 120 app:app`). The previous pure-static `python3 -m http.server` setup was replaced so the dynamic download endpoint can run server-side.
 - `app.py` serves every file in `public/` exactly as before (same paths, query strings ignored as usual) and adds the dynamic endpoint below. It serves *only* from `public/` — `attached_assets/` and `screenshots/` are not exposed.
 - Deployment is `autoscale`, running the same gunicorn command. It is no longer `static` because the site now needs a backend.

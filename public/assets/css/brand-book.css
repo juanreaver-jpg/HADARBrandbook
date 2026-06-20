@@ -690,7 +690,7 @@
   }
   .pioneers-figure {
     aspect-ratio: 16/9;
-    background-image: url('assets/walking-shadow.png');
+    background-image: url('assets/walking-shadow.webp');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -759,7 +759,7 @@
   }
   .heritage-figure {
     aspect-ratio: 4/5;
-    background-image: url('assets/washington-shadow.png');
+    background-image: url('assets/washington-shadow.webp');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;

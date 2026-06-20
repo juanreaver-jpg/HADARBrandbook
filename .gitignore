@@ -15,12 +15,15 @@ build/
 .cache/
 .vercel
 
-# Visual regression per-run artifacts (baselines live in screenshots/baseline/)
-screenshots/current/
-screenshots/diff/
+# Visual regression: ignore every per-run artifact but KEEP the committed baselines.
+# (The bare `screenshots/` rule used to swallow the baselines too — keep the
+# `screenshots/*` + negation form so screenshots/baseline/ is tracked for VRT.)
+screenshots/*
+!screenshots/baseline/
+!screenshots/baseline/**
 
-# Large unserved files — excluded from the static deployment bundle (1GB limit).
-# These are source/staging assets and dev artifacts, not part of the live site.
+# Large unserved source/staging files & local agent workspace.
+# attached_assets/ is the git-ignored masters folder (backed up, then removed);
+# the rule stays so any regenerated copy is never committed.
 attached_assets/
-screenshots/
 .local/

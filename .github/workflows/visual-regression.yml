@@ -35,7 +35,7 @@ jobs:
 
       - name: Start static server
         run: |
-          python3 -m http.server 5000 >/tmp/http-server.log 2>&1 &
+          python3 -m http.server --directory public 5000 >/tmp/http-server.log 2>&1 &
           echo $! > /tmp/http-server.pid
           # Wait for the server to actually answer before running the check.
           for i in $(seq 1 30); do

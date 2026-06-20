@@ -56,9 +56,10 @@ async function openPage(browser, viewport) {
   } catch {
     // ignore — some assets keep the network busy; we still wait for images below
   }
-  // Disable animations/transitions for stability
+  // Disable animations/transitions/video backgrounds for stability.
+  // The hero video frame changes between captures, so VRT uses the poster image.
   await page.addStyleTag({
-    content: `*,*::before,*::after{animation:none!important;transition:none!important;caret-color:transparent!important}`,
+    content: `*,*::before,*::after{animation:none!important;transition:none!important;caret-color:transparent!important}.hero-video{opacity:0!important}`,
   });
   // Best-effort wait for fonts and in-flight images, capped so a single
   // stalled asset can never hang the run.
